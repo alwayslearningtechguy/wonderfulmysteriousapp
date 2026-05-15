@@ -481,12 +481,26 @@
 }</pre>
       </div>
 
-      <div class="full-row">
-        <a class="link-btn" href="/api/weather">
-          <span class="arrow">↗</span> Open /api/weather
-        </a>
-      </div>
+<div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+  <p class="api-section-title">Test This Endpoint</p>
+
+  <form id="weather-test-form" onsubmit="handleWeatherTest(event)" style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin-bottom:16px;">
+    <div style="display:flex;flex-direction:column;gap:4px;">
+      <label style="font-size:11px;color:var(--text-dim);">City (optional):</label>
+      <input type="text" id="weather-city" placeholder="Seattle" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
     </div>
+
+    <a class="link-btn" href="/api/weather" onclick="document.getElementById('weather-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
+      <span class="arrow">→</span> Send GET Request
+    </a>
+  </form>
+
+  <div id="weather-response-container" style="display:none;">
+    <p class="api-section-title">Response Status: <span id="weather-status-code" style="color:var(--accent);"></span></p>
+    <pre id="weather-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
+  </div>
+</div>
+
   </div>
 
   <!-- INSIGHT -->
@@ -540,12 +554,25 @@
 }</pre>
       </div>
 
-      <div class="full-row">
-        <a class="link-btn" href="/api/insight">
-          <span class="arrow">↗</span> Open /api/insight
-        </a>
-      </div>
+      <div class="full-row" style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+  <p class="api-section-title">Test This Endpoint</p>
+
+  <form id="insight-test-form" onsubmit="handleInsightTest(event)" style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin-bottom:16px;">
+    <div style="display:flex;flex-direction:column;gap:4px;">
+      <label style="font-size:11px;color:var(--text-dim);">Topic (optional):</label>
+      <input type="text" id="insight-topic" placeholder="general" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
     </div>
+
+    <a class="link-btn" href="/api/insight" onclick="document.getElementById('insight-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
+      <span class="arrow">→</span> Send GET Request
+    </a>
+  </form>
+
+  <div id="insight-response-container" style="display:none;">
+    <p class="api-section-title">Response Status: <span id="insight-status-code" style="color:var(--accent);"></span></p>
+    <pre id="insight-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
+  </div>
+</div>
   </div>
 
   <!-- FORTUNE -->
@@ -593,12 +620,20 @@
 }</pre>
       </div>
 
-      <div class="full-row">
-        <a class="link-btn" href="/api/fortune">
-          <span class="arrow">↗</span> Open /api/fortune
-        </a>
-      </div>
-    </div>
+<div class="full-row" style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+  <p class="api-section-title">Test This Endpoint</p>
+
+  <form id="fortune-test-form" onsubmit="handleFortuneTest(event)" style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin-bottom:16px;">
+    <a class="link-btn" href="/api/fortune" onclick="document.getElementById('fortune-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
+      <span class="arrow">→</span> Send GET Request
+    </a>
+  </form>
+
+  <div id="fortune-response-container" style="display:none;">
+    <p class="api-section-title">Response Status: <span id="fortune-status-code" style="color:var(--accent);"></span></p>
+    <pre id="fortune-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
+  </div>
+</div>
   </div>
 
   <!-- SUBMIT -->
@@ -722,7 +757,33 @@
   <span class="key">"current_favorites"</span>: [<span class="val">42</span>]
 }</pre>
       </div>
+      <div class="full-row" style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);">
+  <p class="api-section-title">Test This Endpoint</p>
+
+  <form id="favorites-post-form" onsubmit="handleFavoritesPost(event)" 
+        style="display:flex;flex-direction:column;gap:14px;max-width:420px;margin-bottom:18px;">
+
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <label style="font-size:11px;color:var(--text-dim);">Favorite ID:</label>
+      <input type="number" id="favorites-post-id" value="42" required
+             style="background:var(--bg);border:1px solid var(--border);color:var(--text);
+                    padding:9px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
     </div>
+
+    <a class="link-btn" href="/api/favorites"
+       onclick="document.getElementById('favorites-post-form').requestSubmit(); event.preventDefault();"
+       style="justify-content:center;cursor:pointer;">
+      <span class="arrow">→</span> Send POST Request
+    </a>
+  </form>
+
+  <div id="favorites-post-response-container" style="display:none;">
+    <p class="api-section-title">
+      Response Status: <span id="favorites-post-status-code" style="color:var(--accent);"></span>
+    </p>
+    <pre id="favorites-post-response-text" style="margin-top:6px;max-height:220px;overflow-y:auto;"></pre>
+  </div>
+</div>
   </div>
 
   <!-- FAVORITES GET -->
@@ -826,6 +887,112 @@
     }
   }
 </script>
-  
+
+    <script>
+/* -------------------------------------------------------
+   Shared Utility: Send Request + Render Response
+------------------------------------------------------- */
+async function sendRequest({ url, method = "GET", body = null }) {
+  try {
+    const response = await fetch(url, {
+      method,
+      headers: body ? { "Content-Type": "application/json" } : undefined,
+      body: body ? JSON.stringify(body) : null
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    return {
+      ok: response.ok,
+      status: `${response.status} ${response.statusText}`,
+      data
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      status: "Network Error",
+      data: { error: err.message }
+    };
+  }
+}
+
+/* -------------------------------------------------------
+   Render Helper
+------------------------------------------------------- */
+function renderResponse(containerId, statusId, textId, result) {
+  document.getElementById(statusId).textContent = result.status;
+  document.getElementById(textId).textContent = JSON.stringify(result.data, null, 2);
+  document.getElementById(containerId).style.display = "block";
+}
+
+/* -------------------------------------------------------
+   WEATHER
+------------------------------------------------------- */
+async function handleWeatherTest(event) {
+  event.preventDefault();
+  const city = document.getElementById("weather-city").value.trim();
+  const url = city ? `/api/weather?city=${encodeURIComponent(city)}` : "/api/weather";
+
+  const result = await sendRequest({ url });
+  renderResponse("weather-response-container", "weather-status-code", "weather-response-text", result);
+}
+
+/* -------------------------------------------------------
+   INSIGHT
+------------------------------------------------------- */
+async function handleInsightTest(event) {
+  event.preventDefault();
+  const topic = document.getElementById("insight-topic").value.trim();
+  const url = topic ? `/api/insight?topic=${encodeURIComponent(topic)}` : "/api/insight";
+
+  const result = await sendRequest({ url });
+  renderResponse("insight-response-container", "insight-status-code", "insight-response-text", result);
+}
+
+/* -------------------------------------------------------
+   FORTUNE
+------------------------------------------------------- */
+async function handleFortuneTest(event) {
+  event.preventDefault();
+  const result = await sendRequest({ url: "/api/fortune" });
+  renderResponse("fortune-response-container", "fortune-status-code", "fortune-response-text", result);
+}
+
+/* -------------------------------------------------------
+   SUBMIT (already existed, now polished)
+------------------------------------------------------- */
+async function handleApiSubmit(event) {
+  event.preventDefault();
+
+  const username = document.getElementById("submit-username").value;
+  const score = parseInt(document.getElementById("submit-score").value, 10);
+
+  const result = await sendRequest({
+    url: "/api/submit",
+    method: "POST",
+    body: { user: username, data: { score } }
+  });
+
+  renderResponse("submit-response-container", "submit-status-code", "submit-response-text", result);
+}
+
+/* -------------------------------------------------------
+   FAVORITES POST
+------------------------------------------------------- */
+async function handleFavoritesPost(event) {
+  event.preventDefault();
+
+  const id = parseInt(document.getElementById("favorites-post-id").value, 10);
+
+  const result = await sendRequest({
+    url: "/api/favorites",
+    method: "POST",
+    body: { id }
+  });
+
+  renderResponse("favorites-post-response-container", "favorites-post-status-code", "favorites-post-response-text", result);
+}
+</script>
+
 </body>
 </html>
