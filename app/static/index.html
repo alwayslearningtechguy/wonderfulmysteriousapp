@@ -424,6 +424,7 @@
     </div>
   </div>
 
+  <!-- WEATHER -->
   <div class="api-card" id="weather">
     <div class="api-header" onclick="toggle(this)">
       <span class="method-tag method-get">GET</span>
@@ -480,30 +481,15 @@
 }</pre>
       </div>
 
-      <div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-        <p class="api-section-title">Test This Endpoint</p>
-        <form onsubmit="handleGetRequest(event, '/api/weather', 'weather')" style="display: flex; gap: 12px; align-items: flex-end; max-width: 400px; margin-bottom: 16px;">
-          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
-            <label style="font-size: 11px; color: var(--text-dim);">City Name:</label>
-            <input type="text" id="weather-param" value="Chicago" style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
-          </div>
-          <button type="submit" class="link-btn" style="cursor: pointer; height: 36px;">
-            <span class="arrow">→</span> Send GET
-          </button>
-        </form>
-        <div id="weather-response-container" style="display: none;">
-          <p class="api-section-title">Response Status: <span id="weather-status-code" style="color: var(--accent);"></span></p>
-          <pre id="weather-response-text" style="margin-top: 4px; max-height: 200px; overflow-y: auto;"></pre>
-        </div>
-        <div style="margin-top: 12px;">
-          <a class="link-btn" href="/api/weather">
-            <span class="arrow">↗</span> Raw /api/weather Link
-          </a>
-        </div>
+      <div class="full-row">
+        <a class="link-btn" href="/api/weather">
+          <span class="arrow">↗</span> Open /api/weather
+        </a>
       </div>
     </div>
   </div>
 
+  <!-- INSIGHT -->
   <div class="api-card" id="insight">
     <div class="api-header" onclick="toggle(this)">
       <span class="method-tag method-get">GET</span>
@@ -554,36 +540,15 @@
 }</pre>
       </div>
 
-      <div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-        <p class="api-section-title">Test This Endpoint</p>
-        <form onsubmit="handleGetRequest(event, '/api/insight', 'insight')" style="display: flex; gap: 12px; align-items: flex-end; max-width: 400px; margin-bottom: 16px;">
-          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
-            <label style="font-size: 11px; color: var(--text-dim);">Topic:</label>
-            <select id="insight-param" style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px; width: 100%;">
-              <option value="general">general</option>
-              <option value="technology" selected>technology</option>
-              <option value="productivity">productivity</option>
-              <option value="leadership">leadership</option>
-              <option value="creativity">creativity</option>
-            </select>
-          </div>
-          <button type="submit" class="link-btn" style="cursor: pointer; height: 36px;">
-            <span class="arrow">→</span> Send GET
-          </button>
-        </form>
-        <div id="insight-response-container" style="display: none;">
-          <p class="api-section-title">Response Status: <span id="insight-status-code" style="color: var(--accent);"></span></p>
-          <pre id="insight-response-text" style="margin-top: 4px; max-height: 200px; overflow-y: auto;"></pre>
-        </div>
-        <div style="margin-top: 12px;">
-          <a class="link-btn" href="/api/insight">
-            <span class="arrow">↗</span> Raw /api/insight Link
-          </a>
-        </div>
+      <div class="full-row">
+        <a class="link-btn" href="/api/insight">
+          <span class="arrow">↗</span> Open /api/insight
+        </a>
       </div>
     </div>
   </div>
 
+  <!-- FORTUNE -->
   <div class="api-card" id="fortune">
     <div class="api-header" onclick="toggle(this)">
       <span class="method-tag method-get">GET</span>
@@ -628,24 +593,15 @@
 }</pre>
       </div>
 
-      <div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-        <p class="api-section-title">Test This Endpoint</p>
-        <button onclick="handleGetRequest(event, '/api/fortune', 'fortune')" class="link-btn" style="cursor: pointer; margin-bottom: 16px;">
-          <span class="arrow">→</span> Send GET Request
-        </button>
-        <div id="fortune-response-container" style="display: none;">
-          <p class="api-section-title">Response Status: <span id="fortune-status-code" style="color: var(--accent);"></span></p>
-          <pre id="fortune-response-text" style="margin-top: 4px; max-height: 200px; overflow-y: auto;"></pre>
-        </div>
-        <div style="margin-top: 12px;">
-          <a class="link-btn" href="/api/fortune">
-            <span class="arrow">↗</span> Raw /api/fortune Link
-          </a>
-        </div>
+      <div class="full-row">
+        <a class="link-btn" href="/api/fortune">
+          <span class="arrow">↗</span> Open /api/fortune
+        </a>
       </div>
     </div>
   </div>
 
+  <!-- SUBMIT -->
   <div class="api-card" id="submit">
     <div class="api-header" onclick="toggle(this)">
       <span class="method-tag method-post">POST</span>
@@ -696,7 +652,7 @@
 }</pre>
       </div>
 
-      <div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+<div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
         <p class="api-section-title">Test This Endpoint</p>
         
         <form id="submit-test-form" onsubmit="handleApiSubmit(event)" style="display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin-bottom: 16px;">
@@ -727,6 +683,7 @@
     </div>
   </div>
 
+  <!-- FAVORITES POST -->
   <div class="api-card" id="favorites-post">
     <div class="api-header" onclick="toggle(this)">
       <span class="method-tag method-post">POST</span>
@@ -765,26 +722,10 @@
   <span class="key">"current_favorites"</span>: [<span class="val">42</span>]
 }</pre>
       </div>
-
-      <div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-        <p class="api-section-title">Test This Endpoint</p>
-        <form onsubmit="handleFavoriteSubmit(event)" style="display: flex; gap: 12px; align-items: flex-end; max-width: 400px; margin-bottom: 16px;">
-          <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
-            <label style="font-size: 11px; color: var(--text-dim);">Item ID (Integer):</label>
-            <input type="number" id="fav-id-input" value="42" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
-          </div>
-          <a class="link-btn" href="/api/favorites" onclick="event.preventDefault(); this.closest('form').requestSubmit();" style="cursor: pointer; height: 36px;">
-            <span class="arrow">→</span> Send POST
-          </a>
-        </form>
-        <div id="fav-post-response-container" style="display: none;">
-          <p class="api-section-title">Response Status: <span id="fav-post-status-code" style="color: var(--accent);"></span></p>
-          <pre id="fav-post-response-text" style="margin-top: 4px; max-height: 200px; overflow-y: auto;"></pre>
-        </div>
-      </div>
     </div>
   </div>
 
+  <!-- FAVORITES GET -->
   <div class="api-card" id="favorites-get">
     <div class="api-header" onclick="toggle(this)">
       <span class="method-tag method-get">GET</span>
@@ -817,20 +758,10 @@
 { <span class="key">"favorites"</span>: [] }</pre>
       </div>
 
-      <div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-        <p class="api-section-title">Test This Endpoint</p>
-        <button onclick="handleGetRequest(event, '/api/favorites', 'fav-get')" class="link-btn" style="cursor: pointer; margin-bottom: 16px;">
-          <span class="arrow">→</span> Fetch Favorites List
-        </button>
-        <div id="fav-get-response-container" style="display: none;">
-          <p class="api-section-title">Response Status: <span id="fav-get-status-code" style="color: var(--accent);"></span></p>
-          <pre id="fav-get-response-text" style="margin-top: 4px; max-height: 200px; overflow-y: auto;"></pre>
-        </div>
-        <div style="margin-top: 12px;">
-          <a class="link-btn" href="/api/favorites">
-            <span class="arrow">↗</span> Raw /api/favorites Link
-          </a>
-        </div>
+      <div class="full-row">
+        <a class="link-btn" href="/api/favorites">
+          <span class="arrow">↗</span> Open /api/favorites
+        </a>
       </div>
     </div>
   </div>
@@ -850,58 +781,51 @@
     card.classList.toggle('open');
   }
   document.querySelector('.api-card').classList.add('open');
+</script>
 
-  async function handleGetRequest(event, endpoint, prefix) {
-    if (event) event.preventDefault();
-    let targetUrl = endpoint;
-    
-    if (prefix === 'weather') {
-      const city = document.getElementById('weather-param').value;
-      targetUrl += `?city=${encodeURIComponent(city)}`;
-    } else if (prefix === 'insight') {
-      const topic = document.getElementById('insight-param').value;
-      targetUrl += `?topic=${encodeURIComponent(topic)}`;
-    }
-
-    const container = document.getElementById(`${prefix}-response-container`);
-    const statusEl = document.getElementById(`${prefix}-status-code`);
-    const textEl = document.getElementById(`${prefix}-response-text`);
-
-    try {
-      const res = await fetch(targetUrl);
-      const data = await res.json();
-      statusEl.textContent = `${res.status} ${res.statusText}`;
-      textEl.textContent = JSON.stringify(data, null, 2);
-      container.style.display = 'block';
-    } catch (err) {
-      statusEl.textContent = 'Network Error';
-      textEl.textContent = err.message;
-      container.style.display = 'block';
-    }
+<script>
+  function toggle(header) {
+    const card = header.closest('.api-card');
+    card.classList.toggle('open');
   }
+  document.querySelector('.api-card').classList.add('open');
 
+  // New function to handle the live API form submission
   async function handleApiSubmit(event) {
     event.preventDefault();
+    
     const username = document.getElementById('submit-username').value;
     const score = parseInt(document.getElementById('submit-score').value, 10);
     
-    const container = document.getElementById('submit-response-container');
-    const statusEl = document.getElementById('submit-status-code');
-    const textEl = document.getElementById('submit-response-text');
+    const responseContainer = document.getElementById('submit-response-container');
+    const statusCodeElement = document.getElementById('submit-status-code');
+    const responseTextElement = document.getElementById('submit-response-text');
     
     try {
-      const res = await fetch('/api/submit', {
+      const response = await fetch('/api/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user: username, data: { score: score } })
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: username,
+          data: { score: score }
+        })
       });
-      const data = await res.json();
-      statusEl.textContent = `${res.status} ${res.statusText}`;
-      textEl.textContent = JSON.stringify(data, null, 2);
-      container.style.display = 'block';
-    } catch (err) {
-      statusEl.textContent = 'Network Error';
-      textEl.textContent = err.message;
-      container.style.display = 'block';
+      
+      const data = await response.json();
+      
+      // Update UI with the results
+      statusCodeElement.textContent = `${response.status} ${response.statusText}`;
+      responseTextElement.textContent = JSON.stringify(data, null, 2);
+      responseContainer.style.display = 'block';
+    } catch (error) {
+      statusCodeElement.textContent = 'Network Error';
+      responseTextElement.textContent = `Failed to connect to API: ${error.message}`;
+      responseContainer.style.display = 'block';
     }
   }
+</script>
+  
+</body>
+</html>
