@@ -2,7 +2,7 @@ import time
 from fastapi import HTTPException
 
 class RateLimiter:
-    def __init__(self, max_requests: int = 10, window_seconds: int = 60):
+    def __init__(self, max_requests: int = 100, window_seconds: int = 10):
         self.max_requests = max_requests
         self.window_seconds = window_seconds
         self.requests = {}  # key: IP, value: list of timestamps
