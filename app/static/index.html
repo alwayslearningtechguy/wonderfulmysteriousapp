@@ -410,7 +410,7 @@
       All endpoints are served under the base path <strong style="color:var(--text)">/api/</strong>
       and return <strong style="color:var(--text)">JSON</strong> with appropriate HTTP status codes.
       The API is deployed via Docker and served by <strong style="color:var(--text)">Uvicorn</strong>.
-      Rate limiting is enforced globally — up to <strong style="color:var(--text)">10 requests</strong>
+      Rate limiting is enforced globally — up to <strong style="color:var(--text)">100 requests</strong>
       per window per client. Exceeding the limit returns <code style="color:var(--get)">429 Too Many Requests</code>.
       Favorites are stored <strong style="color:var(--text)">in-memory</strong> and reset on container restart.
     </p>
