@@ -6,364 +6,364 @@
   <title>Wonderful & Mysterious API</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+	*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg: #0c0e10;
-      --surface: #13171a;
-      --border: #1f2628;
-      --accent: #c8f542;
-      --accent2: #42d4f5;
-      --muted: #4a5560;
-      --text: #e8ede8;
-      --text-dim: #8a9ba8;
-      --get: #42d4f5;
-      --post: #c8f542;
-      --get-bg: rgba(66,212,245,0.07);
-      --post-bg: rgba(200,245,66,0.07);
-    }
+	:root {
+	  --bg: #0c0e10;
+	  --surface: #13171a;
+	  --border: #1f2628;
+	  --accent: #c8f542;
+	  --accent2: #42d4f5;
+	  --muted: #4a5560;
+	  --text: #e8ede8;
+	  --text-dim: #8a9ba8;
+	  --get: #42d4f5;
+	  --post: #c8f542;
+	  --get-bg: rgba(66,212,245,0.07);
+	  --post-bg: rgba(200,245,66,0.07);
+	}
 
-    html { scroll-behavior: smooth; }
+	html { scroll-behavior: smooth; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Mono', monospace;
-      font-weight: 300;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+	body {
+	  background: var(--bg);
+	  color: var(--text);
+	  font-family: 'DM Mono', monospace;
+	  font-weight: 300;
+	  line-height: 1.6;
+	  overflow-x: hidden;
+	}
 
-    /* ── HEADER ── */
-    header {
-      position: relative;
-      padding: 80px 40px 60px;
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
+	/* ── HEADER ── */
+	header {
+	  position: relative;
+	  padding: 80px 40px 60px;
+	  border-bottom: 1px solid var(--border);
+	  overflow: hidden;
+	}
 
-    .header-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      max-width: 1100px;
-      margin: 0 auto;
-      align-items: end;
-    }
+	.header-grid {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr;
+	  gap: 40px;
+	  max-width: 1100px;
+	  margin: 0 auto;
+	  align-items: end;
+	}
 
-    .header-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(200,245,66,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(66,212,245,0.05) 0%, transparent 60%);
-      pointer-events: none;
-    }
+	.header-bg {
+	  position: absolute;
+	  inset: 0;
+	  background:
+		radial-gradient(ellipse 60% 80% at 80% 20%, rgba(200,245,66,0.06) 0%, transparent 60%),
+		radial-gradient(ellipse 40% 60% at 10% 80%, rgba(66,212,245,0.05) 0%, transparent 60%);
+	  pointer-events: none;
+	}
 
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.1s;
-    }
+	.eyebrow {
+	  font-size: 11px;
+	  letter-spacing: 0.2em;
+	  text-transform: uppercase;
+	  color: var(--accent);
+	  margin-bottom: 16px;
+	  opacity: 0;
+	  animation: fadeUp 0.6s ease forwards 0.1s;
+	}
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.2s;
-    }
+	h1 {
+	  font-family: 'Playfair Display', serif;
+	  font-size: clamp(2.4rem, 5vw, 4rem);
+	  font-weight: 700;
+	  line-height: 1.1;
+	  letter-spacing: -0.02em;
+	  opacity: 0;
+	  animation: fadeUp 0.6s ease forwards 0.2s;
+	}
 
-    h1 em { font-style: italic; color: var(--accent); }
+	h1 em { font-style: italic; color: var(--accent); }
 
-    .header-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.35s;
-    }
+	.header-meta {
+	  display: flex;
+	  flex-direction: column;
+	  gap: 12px;
+	  opacity: 0;
+	  animation: fadeUp 0.6s ease forwards 0.35s;
+	}
 
-    .header-desc {
-      color: var(--text-dim);
-      font-size: 14px;
-      max-width: 360px;
-      line-height: 1.8;
-    }
+	.header-desc {
+	  color: var(--text-dim);
+	  font-size: 14px;
+	  max-width: 360px;
+	  line-height: 1.8;
+	}
 
-    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+	.badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      padding: 4px 10px;
-      border-radius: 2px;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-    }
+	.badge {
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 5px;
+	  font-size: 11px;
+	  letter-spacing: 0.1em;
+	  padding: 4px 10px;
+	  border-radius: 2px;
+	  border: 1px solid var(--border);
+	  color: var(--text-dim);
+	}
 
-    .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+	.badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(12,14,16,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 40px;
-    }
+	/* ── NAV ── */
+	nav {
+	  position: sticky;
+	  top: 0;
+	  z-index: 100;
+	  background: rgba(12,14,16,0.92);
+	  backdrop-filter: blur(12px);
+	  border-bottom: 1px solid var(--border);
+	  padding: 0 40px;
+	}
 
-    nav ul { list-style: none; display: flex; gap: 0; max-width: 1100px; margin: 0 auto; overflow-x: auto; }
+	nav ul { list-style: none; display: flex; gap: 0; max-width: 1100px; margin: 0 auto; overflow-x: auto; }
 
-    nav ul li a {
-      display: block;
-      padding: 14px 18px;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      color: var(--text-dim);
-      text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
+	nav ul li a {
+	  display: block;
+	  padding: 14px 18px;
+	  font-size: 12px;
+	  letter-spacing: 0.08em;
+	  color: var(--text-dim);
+	  text-decoration: none;
+	  border-bottom: 2px solid transparent;
+	  transition: all 0.2s;
+	  white-space: nowrap;
+	}
 
-    nav ul li a:hover { color: var(--text); border-bottom-color: var(--accent); }
+	nav ul li a:hover { color: var(--text); border-bottom-color: var(--accent); }
 
-    /* ── MAIN ── */
-    main { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
+	/* ── MAIN ── */
+	main { max-width: 1100px; margin: 0 auto; padding: 60px 40px; }
 
-    .section-intro {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 40px;
-      margin-bottom: 60px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid var(--border);
-    }
+	.section-intro {
+	  display: grid;
+	  grid-template-columns: 1fr 2fr;
+	  gap: 40px;
+	  margin-bottom: 60px;
+	  padding-bottom: 40px;
+	  border-bottom: 1px solid var(--border);
+	}
 
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      padding-top: 4px;
-    }
+	.section-label {
+	  font-size: 11px;
+	  letter-spacing: 0.2em;
+	  text-transform: uppercase;
+	  color: var(--accent);
+	  padding-top: 4px;
+	}
 
-    .section-text { color: var(--text-dim); font-size: 13px; line-height: 1.9; }
+	.section-text { color: var(--text-dim); font-size: 13px; line-height: 1.9; }
 
-    /* ── API CARD ── */
-    .api-card {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      margin-bottom: 24px;
-      overflow: hidden;
-      transition: border-color 0.2s;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
-    }
+	/* ── API CARD ── */
+	.api-card {
+	  border: 1px solid var(--border);
+	  border-radius: 4px;
+	  margin-bottom: 24px;
+	  overflow: hidden;
+	  transition: border-color 0.2s;
+	  opacity: 0;
+	  animation: fadeUp 0.5s ease forwards;
+	}
 
-    .api-card:hover { border-color: var(--muted); }
-    .api-card:nth-child(1) { animation-delay: 0.05s; }
-    .api-card:nth-child(2) { animation-delay: 0.1s; }
-    .api-card:nth-child(3) { animation-delay: 0.15s; }
-    .api-card:nth-child(4) { animation-delay: 0.2s; }
-    .api-card:nth-child(5) { animation-delay: 0.25s; }
-    .api-card:nth-child(6) { animation-delay: 0.3s; }
+	.api-card:hover { border-color: var(--muted); }
+	.api-card:nth-child(1) { animation-delay: 0.05s; }
+	.api-card:nth-child(2) { animation-delay: 0.1s; }
+	.api-card:nth-child(3) { animation-delay: 0.15s; }
+	.api-card:nth-child(4) { animation-delay: 0.2s; }
+	.api-card:nth-child(5) { animation-delay: 0.25s; }
+	.api-card:nth-child(6) { animation-delay: 0.3s; }
 
-    .api-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 20px 24px;
-      background: var(--surface);
-      cursor: pointer;
-      user-select: none;
-    }
+	.api-header {
+	  display: flex;
+	  align-items: center;
+	  gap: 16px;
+	  padding: 20px 24px;
+	  background: var(--surface);
+	  cursor: pointer;
+	  user-select: none;
+	}
 
-    .method-tag {
-      font-size: 11px;
-      font-weight: 500;
-      padding: 3px 8px;
-      border-radius: 2px;
-      letter-spacing: 0.08em;
-      flex-shrink: 0;
-    }
+	.method-tag {
+	  font-size: 11px;
+	  font-weight: 500;
+	  padding: 3px 8px;
+	  border-radius: 2px;
+	  letter-spacing: 0.08em;
+	  flex-shrink: 0;
+	}
 
-    .method-get { background: var(--get-bg); color: var(--get); border: 1px solid rgba(66,212,245,0.25); }
-    .method-post { background: var(--post-bg); color: var(--post); border: 1px solid rgba(200,245,66,0.25); }
+	.method-get { background: var(--get-bg); color: var(--get); border: 1px solid rgba(66,212,245,0.25); }
+	.method-post { background: var(--post-bg); color: var(--post); border: 1px solid rgba(200,245,66,0.25); }
 
-    .endpoint-path { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
-    .endpoint-name { font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
-    .chevron { font-size: 10px; color: var(--muted); transition: transform 0.2s; flex-shrink: 0; }
-    .api-card.open .chevron { transform: rotate(90deg); }
+	.endpoint-path { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+	.endpoint-name { font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
+	.chevron { font-size: 10px; color: var(--muted); transition: transform 0.2s; flex-shrink: 0; }
+	.api-card.open .chevron { transform: rotate(90deg); }
 
-    .api-body {
-      display: none;
-      padding: 28px 24px;
-      border-top: 1px solid var(--border);
-      gap: 28px;
-      grid-template-columns: 1fr 1fr;
-    }
+	.api-body {
+	  display: none;
+	  padding: 28px 24px;
+	  border-top: 1px solid var(--border);
+	  gap: 28px;
+	  grid-template-columns: 1fr 1fr;
+	}
 
-    .api-card.open .api-body { display: grid; }
+	.api-card.open .api-body { display: grid; }
 
-    .api-section-title {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
+	.api-section-title {
+	  font-size: 10px;
+	  letter-spacing: 0.2em;
+	  text-transform: uppercase;
+	  color: var(--muted);
+	  margin-bottom: 10px;
+	}
 
-    .api-desc { font-size: 13px; color: var(--text-dim); line-height: 1.9; grid-column: 1 / -1; }
+	.api-desc { font-size: 13px; color: var(--text-dim); line-height: 1.9; grid-column: 1 / -1; }
 
-    .param-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+	.param-table { width: 100%; border-collapse: collapse; font-size: 12px; }
 
-    .param-table th {
-      text-align: left;
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 6px 10px 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
+	.param-table th {
+	  text-align: left;
+	  font-size: 10px;
+	  letter-spacing: 0.15em;
+	  text-transform: uppercase;
+	  color: var(--muted);
+	  padding: 6px 10px 10px 0;
+	  border-bottom: 1px solid var(--border);
+	}
 
-    .param-table td {
-      padding: 9px 10px 9px 0;
-      color: var(--text-dim);
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      vertical-align: top;
-    }
+	.param-table td {
+	  padding: 9px 10px 9px 0;
+	  color: var(--text-dim);
+	  border-bottom: 1px solid rgba(255,255,255,0.03);
+	  vertical-align: top;
+	}
 
-    .param-table td:first-child { color: var(--text); }
+	.param-table td:first-child { color: var(--text); }
 
-    .param-tag {
-      display: inline-block;
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 2px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
+	.param-tag {
+	  display: inline-block;
+	  font-size: 10px;
+	  padding: 2px 6px;
+	  border-radius: 2px;
+	  background: rgba(255,255,255,0.04);
+	  border: 1px solid var(--border);
+	  color: var(--muted);
+	}
 
-    .param-required {
-      background: rgba(200,245,66,0.08);
-      border-color: rgba(200,245,66,0.2);
-      color: var(--post);
-    }
+	.param-required {
+	  background: rgba(200,245,66,0.08);
+	  border-color: rgba(200,245,66,0.2);
+	  color: var(--post);
+	}
 
-    pre {
-      background: rgba(0,0,0,0.4);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 16px;
-      font-size: 12px;
-      color: var(--text-dim);
-      overflow-x: auto;
-      line-height: 1.7;
-    }
+	pre {
+	  background: rgba(0,0,0,0.4);
+	  border: 1px solid var(--border);
+	  border-radius: 3px;
+	  padding: 16px;
+	  font-size: 12px;
+	  color: var(--text-dim);
+	  overflow-x: auto;
+	  line-height: 1.7;
+	}
 
-    pre .key { color: var(--accent2); }
-    pre .str { color: #f5a742; }
-    pre .val { color: #e8ede8; }
-    pre .comment { color: var(--muted); font-style: italic; }
+	pre .key { color: var(--accent2); }
+	pre .str { color: #f5a742; }
+	pre .val { color: #e8ede8; }
+	pre .comment { color: var(--muted); font-style: italic; }
 
-    .full-row { grid-column: 1 / -1; }
+	.full-row { grid-column: 1 / -1; }
 
-    .link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      padding: 9px 16px;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--text-dim);
-      text-decoration: none;
-      background: var(--surface);
-      transition: all 0.2s;
-      font-family: 'DM Mono', monospace;
-    }
+	.link-btn {
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 8px;
+	  font-size: 12px;
+	  letter-spacing: 0.05em;
+	  padding: 9px 16px;
+	  border: 1px solid var(--border);
+	  border-radius: 3px;
+	  color: var(--text-dim);
+	  text-decoration: none;
+	  background: var(--surface);
+	  transition: all 0.2s;
+	  font-family: 'DM Mono', monospace;
+	}
 
-    .link-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .link-btn .arrow { font-size: 14px; }
+	.link-btn:hover { border-color: var(--accent); color: var(--accent); }
+	.link-btn .arrow { font-size: 14px; }
 
-    .info-banner {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      padding: 20px 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: 3px;
-      margin-bottom: 40px;
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.8;
-    }
+	.info-banner {
+	  display: flex;
+	  gap: 16px;
+	  align-items: flex-start;
+	  padding: 20px 24px;
+	  background: var(--surface);
+	  border: 1px solid var(--border);
+	  border-left: 3px solid var(--accent);
+	  border-radius: 3px;
+	  margin-bottom: 40px;
+	  font-size: 13px;
+	  color: var(--text-dim);
+	  line-height: 1.8;
+	}
 
-    .info-banner .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-    .info-banner strong { color: var(--text); }
+	.info-banner .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+	.info-banner strong { color: var(--text); }
 
-    /* ── RESPONSE SCHEMA TAG ── */
-    .response-fields {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
+	/* ── RESPONSE SCHEMA TAG ── */
+	.response-fields {
+	  display: flex;
+	  flex-wrap: wrap;
+	  gap: 6px;
+	  margin-top: 8px;
+	}
 
-    .field-tag {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 2px;
-      background: rgba(66,212,245,0.06);
-      border: 1px solid rgba(66,212,245,0.15);
-      color: var(--accent2);
-    }
+	.field-tag {
+	  font-size: 11px;
+	  padding: 2px 8px;
+	  border-radius: 2px;
+	  background: rgba(66,212,245,0.06);
+	  border: 1px solid rgba(66,212,245,0.15);
+	  color: var(--accent2);
+	}
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: var(--muted);
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+	/* ── FOOTER ── */
+	footer {
+	  border-top: 1px solid var(--border);
+	  padding: 40px;
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  font-size: 12px;
+	  color: var(--muted);
+	  max-width: 1100px;
+	  margin: 0 auto;
+	}
 
-    footer a { color: var(--text-dim); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
+	footer a { color: var(--text-dim); text-decoration: none; }
+	footer a:hover { color: var(--accent); }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+	@keyframes fadeUp {
+	  from { opacity: 0; transform: translateY(12px); }
+	  to   { opacity: 1; transform: translateY(0); }
+	}
 
-    @media (max-width: 720px) {
-      .header-grid, .section-intro, .api-body { grid-template-columns: 1fr; }
-      .api-desc, .full-row { grid-column: 1; }
-      header, nav, main, footer { padding-left: 20px; padding-right: 20px; }
-      nav ul li a { padding: 12px 12px; }
-    }
+	@media (max-width: 720px) {
+	  .header-grid, .section-intro, .api-body { grid-template-columns: 1fr; }
+	  .api-desc, .full-row { grid-column: 1; }
+	  header, nav, main, footer { padding-left: 20px; padding-right: 20px; }
+	  nav ul li a { padding: 12px 12px; }
+	}
   </style>
 </head>
 <body>
@@ -371,103 +371,103 @@
 <header>
   <div class="header-bg"></div>
   <div class="header-grid">
-    <div>
-      <p class="eyebrow">REST API Documentation</p>
-      <h1>The <em>Wonderful</em><br>& Mysterious API</h1>
-    </div>
-    <div class="header-meta">
-      <p class="header-desc">
-        A FastAPI-based service providing weather data, insights, fortunes,
-        data submission, and favorites management. Fully self-contained —
-        no external dependencies required.
-      </p>
-      <div class="badge-row">
-        <span class="badge"><span class="dot"></span> FastAPI / Python</span>
-        <span class="badge">Uvicorn Runtime</span>
-        <span class="badge">Rate Limited</span>
-        <span class="badge">Returns JSON</span>
-      </div>
-    </div>
+	<div>
+	  <p class="eyebrow">REST API Documentation</p>
+	  <h1>The <em>Wonderful</em><br>& Mysterious API</h1>
+	</div>
+	<div class="header-meta">
+	  <p class="header-desc">
+		A FastAPI-based service providing weather data, insights, fortunes,
+		data submission, and favorites management. Fully self-contained —
+		no external dependencies required.
+	  </p>
+	  <div class="badge-row">
+		<span class="badge"><span class="dot"></span> FastAPI / Python</span>
+		<span class="badge">Uvicorn Runtime</span>
+		<span class="badge">Rate Limited</span>
+		<span class="badge">Returns JSON</span>
+	  </div>
+	</div>
   </div>
 </header>
 
 <nav>
   <ul>
-    <li><a href="#weather">Weather</a></li>
-    <li><a href="#insight">Insight</a></li>
-    <li><a href="#fortune">Fortune</a></li>
-    <li><a href="#submit">Submit</a></li>
-    <li><a href="#favorites-post">Favorites (POST)</a></li>
-    <li><a href="#favorites-get">Favorites (GET)</a></li>
+	<li><a href="#weather">Weather</a></li>
+	<li><a href="#insight">Insight</a></li>
+	<li><a href="#fortune">Fortune</a></li>
+	<li><a href="#submit">Submit</a></li>
+	<li><a href="#favorites-post">Favorites (POST)</a></li>
+	<li><a href="#favorites-get">Favorites (GET)</a></li>
   </ul>
 </nav>
 
 <main>
 
   <div class="section-intro">
-    <span class="section-label">Overview</span>
-    <p class="section-text">
-      All endpoints are served under the base path <strong style="color:var(--text)">/api/</strong>
-      and return <strong style="color:var(--text)">JSON</strong> with appropriate HTTP status codes.
-      The API is deployed via Docker and served by <strong style="color:var(--text)">Uvicorn</strong>.
-      Rate limiting is enforced globally — up to <strong style="color:var(--text)">100 requests</strong>
-      per window per client. Exceeding the limit returns <code style="color:var(--get)">429 Too Many Requests</code>.
-      Favorites are stored <strong style="color:var(--text)">in-memory</strong> and reset on container restart.
-    </p>
+	<span class="section-label">Overview</span>
+	<p class="section-text">
+	  All endpoints are served under the base path <strong style="color:var(--text)">/api/</strong>
+	  and return <strong style="color:var(--text)">JSON</strong> with appropriate HTTP status codes.
+	  The API is deployed via Docker and served by <strong style="color:var(--text)">Uvicorn</strong>.
+	  Rate limiting is enforced globally — up to <strong style="color:var(--text)">100 requests</strong>
+	  per window per client. Exceeding the limit returns <code style="color:var(--get)">429 Too Many Requests</code>.
+	  Favorites are stored <strong style="color:var(--text)">in-memory</strong> and reset on container restart.
+	</p>
   </div>
 
   <div class="info-banner">
-    <span class="icon">⚡</span>
-    <div>
-      <strong>Rate Limiting:</strong> All endpoints share a global limit of 100 requests per window.
-      The 101st request returns <code>429 Too Many Requests</code>. The limit resets automatically after the window expires.
-    </div>
+	<span class="icon">⚡</span>
+	<div>
+	  <strong>Rate Limiting:</strong> All endpoints share a global limit of 10 requests per window.
+	  The 11th request returns <code>429 Too Many Requests</code>. The limit resets automatically after the window expires.
+	</div>
   </div>
 
   <!-- WEATHER -->
   <div class="api-card" id="weather">
-    <div class="api-header" onclick="toggle(this)">
-      <span class="method-tag method-get">GET</span>
-      <span class="endpoint-path">/api/weather</span>
-      <span class="endpoint-name">Weather</span>
-      <span class="chevron">▶</span>
-    </div>
-    <div class="api-body">
-      <p class="api-desc">
-        Returns mock weather data for a given city. Ten US cities have detailed hardcoded data
-        (Seattle, Miami, New York, Chicago, Los Angeles, Denver, Austin, Boston, Phoenix, Portland).
-        Any other city name returns a sensible generic response rather than an error.
-        Use the optional <code>city</code> query parameter to specify the location.
-      </p>
+	<div class="api-header" onclick="toggle(this)">
+	  <span class="method-tag method-get">GET</span>
+	  <span class="endpoint-path">/api/weather</span>
+	  <span class="endpoint-name">Weather</span>
+	  <span class="chevron">▶</span>
+	</div>
+	<div class="api-body">
+	  <p class="api-desc">
+		Returns mock weather data for a given city. Ten US cities have detailed hardcoded data
+		(Seattle, Miami, New York, Chicago, Los Angeles, Denver, Austin, Boston, Phoenix, Portland).
+		Any other city name returns a sensible generic response rather than an error.
+		Use the optional <code>city</code> query parameter to specify the location.
+	  </p>
 
-      <div>
-        <p class="api-section-title">Query Parameters</p>
-        <table class="param-table">
-          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-          <tr>
-            <td>city</td>
-            <td><span class="param-tag">string</span></td>
-            <td><span class="param-tag">optional</span></td>
-            <td>City name (default: Seattle)</td>
-          </tr>
-        </table>
-        <div class="response-fields" style="margin-top:16px;">
-          <p class="api-section-title" style="width:100%;margin-bottom:8px;">Response Fields</p>
-          <span class="field-tag">city</span>
-          <span class="field-tag">region</span>
-          <span class="field-tag">temp_c</span>
-          <span class="field-tag">temp_f</span>
-          <span class="field-tag">condition</span>
-          <span class="field-tag">humidity_pct</span>
-          <span class="field-tag">wind_mph</span>
-          <span class="field-tag">visibility_miles</span>
-          <span class="field-tag">uv_index</span>
-        </div>
-      </div>
+	  <div>
+		<p class="api-section-title">Query Parameters</p>
+		<table class="param-table">
+		  <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+		  <tr>
+			<td>city</td>
+			<td><span class="param-tag">string</span></td>
+			<td><span class="param-tag">optional</span></td>
+			<td>City name (default: Seattle)</td>
+		  </tr>
+		</table>
+		<div class="response-fields" style="margin-top:16px;">
+		  <p class="api-section-title" style="width:100%;margin-bottom:8px;">Response Fields</p>
+		  <span class="field-tag">city</span>
+		  <span class="field-tag">region</span>
+		  <span class="field-tag">temp_c</span>
+		  <span class="field-tag">temp_f</span>
+		  <span class="field-tag">condition</span>
+		  <span class="field-tag">humidity_pct</span>
+		  <span class="field-tag">wind_mph</span>
+		  <span class="field-tag">visibility_miles</span>
+		  <span class="field-tag">uv_index</span>
+		</div>
+	  </div>
 
-      <div>
-        <p class="api-section-title">Example Response — 200 OK</p>
-        <pre><span class="comment">// GET /api/weather?city=Chicago</span>
+	  <div>
+		<p class="api-section-title">Example Response — 200 OK</p>
+		<pre><span class="comment">// GET /api/weather?city=Chicago</span>
 {
   <span class="key">"city"</span>: <span class="str">"Chicago"</span>,
   <span class="key">"region"</span>: <span class="str">"Illinois, US"</span>,
@@ -479,138 +479,140 @@
   <span class="key">"visibility_miles"</span>: <span class="val">9</span>,
   <span class="key">"uv_index"</span>: <span class="val">3</span>
 }</pre>
-      </div>
+	  </div>
 
 <div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
   <p class="api-section-title">Test This Endpoint</p>
 
   <form id="weather-test-form" onsubmit="handleWeatherTest(event)" style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin-bottom:16px;">
-    <div style="display:flex;flex-direction:column;gap:4px;">
-      <label style="font-size:11px;color:var(--text-dim);">City (optional):</label>
-      <input type="text" id="weather-city" placeholder="Seattle" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
-    </div>
+	<div style="display:flex;flex-direction:column;gap:4px;">
+	  <label style="font-size:11px;color:var(--text-dim);">City (optional):</label>
+	  <input type="text" id="weather-city" placeholder="Seattle" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
+	</div>
 
-    <a class="link-btn" href="/api/weather" onclick="document.getElementById('weather-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
-      <span class="arrow">→</span> Send GET Request
-    </a>
+	<a class="link-btn" href="/api/weather" onclick="document.getElementById('weather-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
+	  <span class="arrow">→</span> Send GET Request
+	</a>
   </form>
 
   <div id="weather-response-container" style="display:none;">
-    <p class="api-section-title">Response Status: <span id="weather-status-code" style="color:var(--accent);"></span></p>
-    <pre id="weather-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
+	<p class="api-section-title">Response Status: <span id="weather-status-code" style="color:var(--accent);"></span></p>
+	<pre id="weather-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
   </div>
 </div>
 
   </div>
+  </div>
 
   <!-- INSIGHT -->
   <div class="api-card" id="insight">
-    <div class="api-header" onclick="toggle(this)">
-      <span class="method-tag method-get">GET</span>
-      <span class="endpoint-path">/api/insight</span>
-      <span class="endpoint-name">Insight</span>
-      <span class="chevron">▶</span>
-    </div>
-    <div class="api-body">
-      <p class="api-desc">
-        Returns a randomly selected insight from a pool of curated messages.
-        Five topic pools are available: <code>general</code>, <code>technology</code>,
-        <code>productivity</code>, <code>leadership</code>, and <code>creativity</code>.
-        Unknown topics fall back to <code>general</code>. Each response includes
-        an <code>available_topics</code> field listing all valid options.
-      </p>
+	<div class="api-header" onclick="toggle(this)">
+	  <span class="method-tag method-get">GET</span>
+	  <span class="endpoint-path">/api/insight</span>
+	  <span class="endpoint-name">Insight</span>
+	  <span class="chevron">▶</span>
+	</div>
+	<div class="api-body">
+	  <p class="api-desc">
+		Returns a randomly selected insight from a pool of curated messages.
+		Five topic pools are available: <code>general</code>, <code>technology</code>,
+		<code>productivity</code>, <code>leadership</code>, and <code>creativity</code>.
+		Unknown topics fall back to <code>general</code>. Each response includes
+		an <code>available_topics</code> field listing all valid options.
+	  </p>
 
-      <div>
-        <p class="api-section-title">Query Parameters</p>
-        <table class="param-table">
-          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-          <tr>
-            <td>topic</td>
-            <td><span class="param-tag">string</span></td>
-            <td><span class="param-tag">optional</span></td>
-            <td>general · technology · productivity · leadership · creativity (default: general)</td>
-          </tr>
-        </table>
-        <div class="response-fields" style="margin-top:16px;">
-          <p class="api-section-title" style="width:100%;margin-bottom:8px;">Response Fields</p>
-          <span class="field-tag">id</span>
-          <span class="field-tag">topic</span>
-          <span class="field-tag">insight</span>
-          <span class="field-tag">available_topics</span>
-        </div>
-      </div>
+	  <div>
+		<p class="api-section-title">Query Parameters</p>
+		<table class="param-table">
+		  <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+		  <tr>
+			<td>topic</td>
+			<td><span class="param-tag">string</span></td>
+			<td><span class="param-tag">optional</span></td>
+			<td>general · technology · productivity · leadership · creativity (default: general)</td>
+		  </tr>
+		</table>
+		<div class="response-fields" style="margin-top:16px;">
+		  <p class="api-section-title" style="width:100%;margin-bottom:8px;">Response Fields</p>
+		  <span class="field-tag">id</span>
+		  <span class="field-tag">topic</span>
+		  <span class="field-tag">insight</span>
+		  <span class="field-tag">available_topics</span>
+		</div>
+	  </div>
 
-      <div>
-        <p class="api-section-title">Example Response — 200 OK</p>
-        <pre><span class="comment">// GET /api/insight?topic=technology</span>
+	  <div>
+		<p class="api-section-title">Example Response — 200 OK</p>
+		<pre><span class="comment">// GET /api/insight?topic=technology</span>
 {
   <span class="key">"id"</span>: <span class="val">482</span>,
   <span class="key">"topic"</span>: <span class="str">"technology"</span>,
   <span class="key">"insight"</span>: <span class="str">"A good API is one that makes the wrong thing hard to do."</span>,
   <span class="key">"available_topics"</span>: [
-    <span class="str">"general"</span>, <span class="str">"technology"</span>,
-    <span class="str">"productivity"</span>, <span class="str">"leadership"</span>, <span class="str">"creativity"</span>
+	<span class="str">"general"</span>, <span class="str">"technology"</span>,
+	<span class="str">"productivity"</span>, <span class="str">"leadership"</span>, <span class="str">"creativity"</span>
   ]
 }</pre>
-      </div>
+	  </div>
 
-      <div class="full-row" style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+	  <div class="full-row" style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
   <p class="api-section-title">Test This Endpoint</p>
 
   <form id="insight-test-form" onsubmit="handleInsightTest(event)" style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin-bottom:16px;">
-    <div style="display:flex;flex-direction:column;gap:4px;">
-      <label style="font-size:11px;color:var(--text-dim);">Topic (optional):</label>
-      <input type="text" id="insight-topic" placeholder="general" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
-    </div>
+	<div style="display:flex;flex-direction:column;gap:4px;">
+	  <label style="font-size:11px;color:var(--text-dim);">Topic (optional):</label>
+	  <input type="text" id="insight-topic" placeholder="general" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
+	</div>
 
-    <a class="link-btn" href="/api/insight" onclick="document.getElementById('insight-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
-      <span class="arrow">→</span> Send GET Request
-    </a>
+	<a class="link-btn" href="/api/insight" onclick="document.getElementById('insight-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
+	  <span class="arrow">→</span> Send GET Request
+	</a>
   </form>
 
   <div id="insight-response-container" style="display:none;">
-    <p class="api-section-title">Response Status: <span id="insight-status-code" style="color:var(--accent);"></span></p>
-    <pre id="insight-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
+	<p class="api-section-title">Response Status: <span id="insight-status-code" style="color:var(--accent);"></span></p>
+	<pre id="insight-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
   </div>
 </div>
   </div>
-
+	</div>
+	
   <!-- FORTUNE -->
   <div class="api-card" id="fortune">
-    <div class="api-header" onclick="toggle(this)">
-      <span class="method-tag method-get">GET</span>
-      <span class="endpoint-path">/api/fortune</span>
-      <span class="endpoint-name">Fortune</span>
-      <span class="chevron">▶</span>
-    </div>
-    <div class="api-body">
-      <p class="api-desc">
-        Returns a randomly selected fortune from a pool of 12 curated entries.
-        Each fortune includes a lucky number, a lucky color, and a piece of advice.
-        No parameters are required. Results vary between calls.
-      </p>
+	<div class="api-header" onclick="toggle(this)">
+	  <span class="method-tag method-get">GET</span>
+	  <span class="endpoint-path">/api/fortune</span>
+	  <span class="endpoint-name">Fortune</span>
+	  <span class="chevron">▶</span>
+	</div>
+	<div class="api-body">
+	  <p class="api-desc">
+		Returns a randomly selected fortune from a pool of 12 curated entries.
+		Each fortune includes a lucky number, a lucky color, and a piece of advice.
+		No parameters are required. Results vary between calls.
+	  </p>
 
-      <div>
-        <p class="api-section-title">Parameters</p>
-        <table class="param-table">
-          <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-          <tr>
-            <td colspan="4" style="color:var(--muted); font-style:italic;">No parameters</td>
-          </tr>
-        </table>
-        <div class="response-fields" style="margin-top:16px;">
-          <p class="api-section-title" style="width:100%;margin-bottom:8px;">Response Fields</p>
-          <span class="field-tag">id</span>
-          <span class="field-tag">fortune</span>
-          <span class="field-tag">lucky_number</span>
-          <span class="field-tag">lucky_color</span>
-          <span class="field-tag">advice</span>
-        </div>
-      </div>
+	  <div>
+		<p class="api-section-title">Parameters</p>
+		<table class="param-table">
+		  <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+		  <tr>
+			<td colspan="4" style="color:var(--muted); font-style:italic;">No parameters</td>
+		  </tr>
+		</table>
+		<div class="response-fields" style="margin-top:16px;">
+		  <p class="api-section-title" style="width:100%;margin-bottom:8px;">Response Fields</p>
+		  <span class="field-tag">id</span>
+		  <span class="field-tag">fortune</span>
+		  <span class="field-tag">lucky_number</span>
+		  <span class="field-tag">lucky_color</span>
+		  <span class="field-tag">advice</span>
+		</div>
+	  </div>
 
-      <div>
-        <p class="api-section-title">Example Response — 200 OK</p>
-        <pre><span class="comment">// GET /api/fortune</span>
+	  <div>
+		<p class="api-section-title">Example Response — 200 OK</p>
+		<pre><span class="comment">// GET /api/fortune</span>
 {
   <span class="key">"id"</span>: <span class="val">37</span>,
   <span class="key">"fortune"</span>: <span class="str">"The door you keep passing is the one worth opening."</span>,
@@ -618,62 +620,63 @@
   <span class="key">"lucky_color"</span>: <span class="str">"Teal"</span>,
   <span class="key">"advice"</span>: <span class="str">"Act on the thing you have been deferring."</span>
 }</pre>
-      </div>
+	  </div>
 
 <div class="full-row" style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
   <p class="api-section-title">Test This Endpoint</p>
 
   <form id="fortune-test-form" onsubmit="handleFortuneTest(event)" style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin-bottom:16px;">
-    <a class="link-btn" href="/api/fortune" onclick="document.getElementById('fortune-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
-      <span class="arrow">→</span> Send GET Request
-    </a>
+	<a class="link-btn" href="/api/fortune" onclick="document.getElementById('fortune-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
+	  <span class="arrow">→</span> Send GET Request
+	</a>
   </form>
 
   <div id="fortune-response-container" style="display:none;">
-    <p class="api-section-title">Response Status: <span id="fortune-status-code" style="color:var(--accent);"></span></p>
-    <pre id="fortune-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
+	<p class="api-section-title">Response Status: <span id="fortune-status-code" style="color:var(--accent);"></span></p>
+	<pre id="fortune-response-text" style="margin-top:4px;max-height:200px;overflow-y:auto;"></pre>
   </div>
 </div>
   </div>
+	</div>
 
   <!-- SUBMIT -->
   <div class="api-card" id="submit">
-    <div class="api-header" onclick="toggle(this)">
-      <span class="method-tag method-post">POST</span>
-      <span class="endpoint-path">/api/submit</span>
-      <span class="endpoint-name">Submit</span>
-      <span class="chevron">▶</span>
-    </div>
-    <div class="api-body">
-      <p class="api-desc">
-        Accepts a structured JSON payload with a <code>user</code> string and a <code>data</code>
-        object. The API validates the structure, sanitizes input (including script-like content),
-        and returns <code>201 Created</code> on success. Malformed JSON or missing required fields
-        returns <code>422 Unprocessable Entity</code>.
-      </p>
+	<div class="api-header" onclick="toggle(this)">
+	  <span class="method-tag method-post">POST</span>
+	  <span class="endpoint-path">/api/submit</span>
+	  <span class="endpoint-name">Submit</span>
+	  <span class="chevron">▶</span>
+	</div>
+	<div class="api-body">
+	  <p class="api-desc">
+		Accepts a structured JSON payload with a <code>user</code> string and a <code>data</code>
+		object. The API validates the structure, sanitizes input (including script-like content),
+		and returns <code>201 Created</code> on success. Malformed JSON or missing required fields
+		returns <code>422 Unprocessable Entity</code>.
+	  </p>
 
-      <div>
-        <p class="api-section-title">Request Body</p>
-        <table class="param-table">
-          <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
-          <tr>
-            <td>user</td>
-            <td><span class="param-tag">string</span></td>
-            <td><span class="param-tag param-required">required</span></td>
-            <td>Identifier for the submitting user</td>
-          </tr>
-          <tr>
-            <td>data</td>
-            <td><span class="param-tag">object</span></td>
-            <td><span class="param-tag param-required">required</span></td>
-            <td>Arbitrary key-value payload to submit</td>
-          </tr>
-        </table>
-      </div>
+	  <div>
+		<p class="api-section-title">Request Body</p>
+		<table class="param-table">
+		  <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+		  <tr>
+			<td>user</td>
+			<td><span class="param-tag">string</span></td>
+			<td><span class="param-tag param-required">required</span></td>
+			<td>Identifier for the submitting user</td>
+		  </tr>
+		  <tr>
+			<td>data</td>
+			<td><span class="param-tag">object</span></td>
+			<td><span class="param-tag param-required">required</span></td>
+			<td>Arbitrary key-value payload to submit</td>
+		  </tr>
+		</table>
+	  </div>
 
-      <div>
-        <p class="api-section-title">Example Request &amp; Response</p>
-        <pre><span class="comment">// POST /api/submit</span>
+	  <div>
+		<p class="api-section-title">Example Request &amp; Response</p>
+		<pre><span class="comment">// POST /api/submit</span>
 <span class="comment">// Content-Type: application/json</span>
 {
   <span class="key">"user"</span>: <span class="str">"alice"</span>,
@@ -685,71 +688,71 @@
   <span class="key">"status"</span>: <span class="str">"Created"</span>,
   <span class="key">"received"</span>: { <span class="key">"user"</span>: <span class="str">"alice"</span>, <span class="key">"data"</span>: { <span class="key">"score"</span>: <span class="val">99</span> } }
 }</pre>
-      </div>
+	  </div>
 
 <div class="full-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
-        <p class="api-section-title">Test This Endpoint</p>
-        
-        <form id="submit-test-form" onsubmit="handleApiSubmit(event)" style="display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin-bottom: 16px;">
-          <div style="display: flex; flex-direction: column; gap: 4px;">
-            <label style="font-size: 11px; color: var(--text-dim);">User Name:</label>
-            <input type="text" id="submit-username" value="alice" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
-          </div>
-          <div style="display: flex; flex-direction: column; gap: 4px;">
-            <label style="font-size: 11px; color: var(--text-dim);">Score (Data):</label>
-            <input type="number" id="submit-score" value="99" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
-          </div>
-          
-          <a class="link-btn" href="/api/submit" onclick="document.getElementById('submit-test-form').requestSubmit(); event.preventDefault();" style="justify-content: center; cursor: pointer;">
-            <span class="arrow">→</span> Send POST Request
-          </a>
-        </form>
+		<p class="api-section-title">Test This Endpoint</p>
+		
+		<form id="submit-test-form" onsubmit="handleApiSubmit(event)" style="display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin-bottom: 16px;">
+		  <div style="display: flex; flex-direction: column; gap: 4px;">
+			<label style="font-size: 11px; color: var(--text-dim);">User Name:</label>
+			<input type="text" id="submit-username" value="alice" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
+		  </div>
+		  <div style="display: flex; flex-direction: column; gap: 4px;">
+			<label style="font-size: 11px; color: var(--text-dim);">Score (Data):</label>
+			<input type="number" id="submit-score" value="99" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
+		  </div>
+		  
+		  <a class="link-btn" href="/api/submit" onclick="document.getElementById('submit-test-form').requestSubmit(); event.preventDefault();" style="justify-content: center; cursor: pointer;">
+			<span class="arrow">→</span> Send POST Request
+		  </a>
+		</form>
 
-        <div id="submit-response-container" style="display: none;">
-          <p class="api-section-title">Response Status: <span id="submit-status-code" style="color: var(--accent);"></span></p>
-          <pre id="submit-response-text" style="margin-top: 4px; max-height: 200px; overflow-y: auto;"></pre>
-        </div>
+		<div id="submit-response-container" style="display: none;">
+		  <p class="api-section-title">Response Status: <span id="submit-status-code" style="color: var(--accent);"></span></p>
+		  <pre id="submit-response-text" style="margin-top: 4px; max-height: 200px; overflow-y: auto;"></pre>
+		</div>
 
-        <p style="font-size:12px;color:var(--muted); margin-top: 16px;">
-          Errors: <code style="color:var(--get)">422</code> for malformed JSON or missing fields &nbsp;·&nbsp;
-          <code style="color:var(--get)">429</code> if rate limit exceeded
-        </p>
-      </div>
-    </div>
-  </div>
+		<p style="font-size:12px;color:var(--muted); margin-top: 16px;">
+		  Errors: <code style="color:var(--get)">422</code> for malformed JSON or missing fields &nbsp;·&nbsp;
+		  <code style="color:var(--get)">429</code> if rate limit exceeded
+		</p>
+	  </div>
+	</div>
+	  </div>
 
 <!-- FAVORITES POST -->
 <div class="api-card" id="favorites-post">
   <div class="api-header" onclick="toggle(this)">
-    <span class="method-tag method-post">POST</span>
-    <span class="endpoint-path">/api/favorites</span>
-    <span class="endpoint-name">Add Favorite</span>
-    <span class="chevron">▶</span>
+	<span class="method-tag method-post">POST</span>
+	<span class="endpoint-path">/api/favorites</span>
+	<span class="endpoint-name">Add Favorite</span>
+	<span class="chevron">▶</span>
   </div>
 
   <div class="api-body">
-    <p class="api-desc">
-      Adds an item ID to the in-memory favorites list and returns the full updated list.
-      Favorites persist for the lifetime of the running container and reset on restart.
-      The request body must contain an integer <code>id</code> field.
-    </p>
+	<p class="api-desc">
+	  Adds an item ID to the in-memory favorites list and returns the full updated list.
+	  Favorites persist for the lifetime of the running container and reset on restart.
+	  The request body must contain an integer <code>id</code> field.
+	</p>
 
-    <div>
-      <p class="api-section-title">Request Body</p>
-      <table class="param-table">
-        <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
-        <tr>
-          <td>id</td>
-          <td><span class="param-tag">integer</span></td>
-          <td><span class="param-tag param-required">required</span></td>
-          <td>Numeric ID of the item to add to favorites</td>
-        </tr>
-      </table>
-    </div>
+	<div>
+	  <p class="api-section-title">Request Body</p>
+	  <table class="param-table">
+		<tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+		<tr>
+		  <td>id</td>
+		  <td><span class="param-tag">integer</span></td>
+		  <td><span class="param-tag param-required">required</span></td>
+		  <td>Numeric ID of the item to add to favorites</td>
+		</tr>
+	  </table>
+	</div>
 
-    <div>
-      <p class="api-section-title">Example Request &amp; Response</p>
-      <pre><span class="comment">// POST /api/favorites</span>
+	<div>
+	  <p class="api-section-title">Example Request &amp; Response</p>
+	  <pre><span class="comment">// POST /api/favorites</span>
 { <span class="key">"id"</span>: <span class="val">42</span> }
 
 <span class="comment">// → 201 Created</span>
@@ -757,164 +760,168 @@
   <span class="key">"message"</span>: <span class="str">"Saved"</span>,
   <span class="key">"current_favorites"</span>: [<span class="val">42</span>]
 }</pre>
-    </div>
+	</div>
+	
 
-    <!-- FAVORITES POST UI  -->
-    <div class="full-row" style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);">
-      <p class="api-section-title">Test This Endpoint</p>
+	<!-- FAVORITES POST UI  -->
+	<div class="full-row" style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);">
+	  <p class="api-section-title">Test This Endpoint</p>
 
-      <form id="favorites-post-form" onsubmit="handleFavoritesPost(event)"
-            style="display:flex;flex-direction:column;gap:14px;max-width:420px;margin-bottom:18px;">
+	  <form id="favorites-post-form" onsubmit="handleFavoritesPost(event)"
+			style="display:flex;flex-direction:column;gap:14px;max-width:420px;margin-bottom:18px;">
 
-        <div style="display:flex;flex-direction:column;gap:6px;">
-          <label style="font-size:11px;color:var(--text-dim);">Favorite ID:</label>
-          <input type="number" id="favorites-post-id" value="42" required
-                style="background:var(--bg);border:1px solid var(--border);color:var(--text);
-                      padding:9px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
-        </div>
+		<div style="display:flex;flex-direction:column;gap:6px;">
+		  <label style="font-size:11px;color:var(--text-dim);">Favorite ID:</label>
+		  <input type="number" id="favorites-post-id" value="42" required
+				style="background:var(--bg);border:1px solid var(--border);color:var(--text);
+					  padding:9px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
+		</div>
 
-        <a class="link-btn" href="/api/favorites"
-           onclick="document.getElementById('favorites-post-form').requestSubmit(); event.preventDefault();"
-           style="justify-content:center;cursor:pointer;">
-          <span class="arrow">→</span> Send POST Request
-        </a>
-      </form>
+		<a class="link-btn" href="/api/favorites"
+		   onclick="document.getElementById('favorites-post-form').requestSubmit(); event.preventDefault();"
+		   style="justify-content:center;cursor:pointer;">
+		  <span class="arrow">→</span> Send POST Request
+		</a>
+	  </form>
 
-      <div id="favorites-post-response-container" style="display:none;">
-        <p class="api-section-title">
-          Response Status: <span id="favorites-post-status-code" style="color:var(--accent);"></span>
-        </p>
-        <pre id="favorites-post-response-text" style="margin-top:6px;max-height:220px;overflow-y:auto;"></pre>
-      </div>
-    </div>
+	  <div id="favorites-post-response-container" style="display:none;">
+		<p class="api-section-title">
+		  Response Status: <span id="favorites-post-status-code" style="color:var(--accent);"></span>
+		</p>
+		<pre id="favorites-post-response-text" style="margin-top:6px;max-height:220px;overflow-y:auto;"></pre>
+	  </div>
+	</div>
+  </div>
+</div>
 
 <!-- FAVORITES GET -->
 <div class="api-card" id="favorites-get">
   <div class="api-header" onclick="toggle(this)">
-    <span class="method-tag method-get">GET</span>
-    <span class="endpoint-path">/api/favorites</span>
-    <span class="endpoint-name">Get Favorites</span>
-    <span class="chevron">▶</span>
+	<span class="method-tag method-get">GET</span>
+	<span class="endpoint-path">/api/favorites</span>
+	<span class="endpoint-name">Get Favorites</span>
+	<span class="chevron">▶</span>
   </div>
 
   <div class="api-body">
-    <p class="api-desc">
-      Returns the current in-memory favorites list. Handles both empty and populated states.
-      Data is stored for the lifetime of the container only — restarting resets the list to empty.
-    </p>
+	<p class="api-desc">
+	  Returns the current in-memory favorites list. Handles both empty and populated states.
+	  Data is stored for the lifetime of the container only — restarting resets the list to empty.
+	</p>
 
-    <div>
-      <p class="api-section-title">Parameters</p>
-      <table class="param-table">
-        <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-        <tr>
-          <td colspan="4" style="color:var(--muted); font-style:italic;">No parameters</td>
-        </tr>
-      </table>
-    </div>
+	<div>
+	  <p class="api-section-title">Parameters</p>
+	  <table class="param-table">
+		<tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+		<tr>
+		  <td colspan="4" style="color:var(--muted); font-style:italic;">No parameters</td>
+		</tr>
+	  </table>
+	</div>
 
-    <div>
-      <p class="api-section-title">Example Response — 200 OK</p>
-      <pre><span class="comment">// GET /api/favorites</span>
+	<div>
+	  <p class="api-section-title">Example Response — 200 OK</p>
+	  <pre><span class="comment">// GET /api/favorites</span>
 { <span class="key">"favorites"</span>: [<span class="val">42</span>, <span class="val">7</span>] }
 
 <span class="comment">// When empty:</span>
 { <span class="key">"favorites"</span>: [] }</pre>
-    </div>
+	</div>
 
-    <div class="full-row">
-      <a class="link-btn" href="/api/favorites">
-        <span class="arrow">↗</span> Open /api/favorites
-      </a>
-    </div>
+	<div class="full-row">
+	  <a class="link-btn" href="/api/favorites">
+		<span class="arrow">↗</span> Open /api/favorites
+	  </a>
+	</div>
   </div>
+</div>
 
 </main>
 
 <footer>
   <span>Wonderful &amp; Mysterious API &mdash; FastAPI / Python / Uvicorn</span>
   <a href="https://github.com/AlwaysLearningTechGuy/WonderfulMysteriousApp" target="_blank">
-    View on GitHub ↗
+	View on GitHub ↗
   </a>
 </footer>
 
 <script>
   function toggle(header) {
-    const card = header.closest('.api-card');
-    card.classList.toggle('open');
+	const card = header.closest('.api-card');
+	card.classList.toggle('open');
   }
   document.querySelector('.api-card').classList.add('open');
 </script>
 
 <script>
   function toggle(header) {
-    const card = header.closest('.api-card');
-    card.classList.toggle('open');
+	const card = header.closest('.api-card');
+	card.classList.toggle('open');
   }
   document.querySelector('.api-card').classList.add('open');
 
   // New function to handle the live API form submission
   async function handleApiSubmit(event) {
-    event.preventDefault();
-    
-    const username = document.getElementById('submit-username').value;
-    const score = parseInt(document.getElementById('submit-score').value, 10);
-    
-    const responseContainer = document.getElementById('submit-response-container');
-    const statusCodeElement = document.getElementById('submit-status-code');
-    const responseTextElement = document.getElementById('submit-response-text');
-    
-    try {
-      const response = await fetch('/api/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          user: username,
-          data: { score: score }
-        })
-      });
-      
-      const data = await response.json();
-      
-      // Update UI with the results
-      statusCodeElement.textContent = `${response.status} ${response.statusText}`;
-      responseTextElement.textContent = JSON.stringify(data, null, 2);
-      responseContainer.style.display = 'block';
-    } catch (error) {
-      statusCodeElement.textContent = 'Network Error';
-      responseTextElement.textContent = `Failed to connect to API: ${error.message}`;
-      responseContainer.style.display = 'block';
-    }
+	event.preventDefault();
+	
+	const username = document.getElementById('submit-username').value;
+	const score = parseInt(document.getElementById('submit-score').value, 10);
+	
+	const responseContainer = document.getElementById('submit-response-container');
+	const statusCodeElement = document.getElementById('submit-status-code');
+	const responseTextElement = document.getElementById('submit-response-text');
+	
+	try {
+	  const response = await fetch('/api/submit', {
+		method: 'POST',
+		headers: {
+		  'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+		  user: username,
+		  data: { score: score }
+		})
+	  });
+	  
+	  const data = await response.json();
+	  
+	  // Update UI with the results
+	  statusCodeElement.textContent = `${response.status} ${response.statusText}`;
+	  responseTextElement.textContent = JSON.stringify(data, null, 2);
+	  responseContainer.style.display = 'block';
+	} catch (error) {
+	  statusCodeElement.textContent = 'Network Error';
+	  responseTextElement.textContent = `Failed to connect to API: ${error.message}`;
+	  responseContainer.style.display = 'block';
+	}
   }
 </script>
 
-    <script>
+	<script>
 /* -------------------------------------------------------
    Shared Utility: Send Request + Render Response
 ------------------------------------------------------- */
 async function sendRequest({ url, method = "GET", body = null }) {
   try {
-    const response = await fetch(url, {
-      method,
-      headers: body ? { "Content-Type": "application/json" } : undefined,
-      body: body ? JSON.stringify(body) : null
-    });
+	const response = await fetch(url, {
+	  method,
+	  headers: body ? { "Content-Type": "application/json" } : undefined,
+	  body: body ? JSON.stringify(body) : null
+	});
 
-    const data = await response.json().catch(() => ({}));
+	const data = await response.json().catch(() => ({}));
 
-    return {
-      ok: response.ok,
-      status: `${response.status} ${response.statusText}`,
-      data
-    };
+	return {
+	  ok: response.ok,
+	  status: `${response.status} ${response.statusText}`,
+	  data
+	};
   } catch (err) {
-    return {
-      ok: false,
-      status: "Network Error",
-      data: { error: err.message }
-    };
+	return {
+	  ok: false,
+	  status: "Network Error",
+	  data: { error: err.message }
+	};
   }
 }
 
@@ -970,9 +977,9 @@ async function handleApiSubmit(event) {
   const score = parseInt(document.getElementById("submit-score").value, 10);
 
   const result = await sendRequest({
-    url: "/api/submit",
-    method: "POST",
-    body: { user: username, data: { score } }
+	url: "/api/submit",
+	method: "POST",
+	body: { user: username, data: { score } }
   });
 
   renderResponse("submit-response-container", "submit-status-code", "submit-response-text", result);
@@ -987,9 +994,9 @@ async function handleFavoritesPost(event) {
   const id = parseInt(document.getElementById("favorites-post-id").value, 10);
 
   const result = await sendRequest({
-    url: "/api/favorites",
-    method: "POST",
-    body: { id }
+	url: "/api/favorites",
+	method: "POST",
+	body: { id }
   });
 
   renderResponse("favorites-post-response-container", "favorites-post-status-code", "favorites-post-response-text", result);
