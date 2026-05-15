@@ -30,6 +30,8 @@ jobs:
       run: |
         export PYTHONPATH=$PYTHONPATH:$(pwd)
         pytest -v
-
+          
     - name: Build Docker image (tests run inside Docker)
+      working-directory: ${{ github.workspace }}
       run: docker build -t wonderfulapp .
+
