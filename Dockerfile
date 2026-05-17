@@ -1,17 +1,21 @@
 # Use a lightweight Python image
 FROM python:3.11-slim
 
-# Set the working directory
 WORKDIR /app
 
-# Install dependencies
-RUN pip install --no-cache-dir fastapi uvicorn pytest httpx
+COPY . .
 
-# Copy the application code
-COPY ./app /app/app
+# Install app dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port
-EXPOSE 8000
+# Install test dependencies
+RUN pip install --no-cache-dir pytest pytest-asyncio httpx anyio
 
-# Command to run the application
+# Make sure Python can find the app package
+ENV PYTHONPATH=/app
+
+# Run tests during build (fail build if tests fail)
+RUN pytest --maxfail=1 --disable-warnings
+
+# Start the app
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

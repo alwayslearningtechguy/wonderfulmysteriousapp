@@ -89,7 +89,7 @@ Unit tests ensure internal logic is correct and isolated from FastAPI routing.
 ---
 
 ### 5.2 Integration Testing
-Integration tests use FastAPI’s `TestClient` to validate:
+Integration tests validate:
 
 - HTTP status codes  
 - JSON response structure  
@@ -100,6 +100,14 @@ Integration tests use FastAPI’s `TestClient` to validate:
 - Rate limiting enforcement  
 
 Each endpoint has its own integration test file for clarity and maintainability.
+
+Note: Some usability tests are automated and consequently tested here too. They address the following:
+
+- Verify that the landing page is reachable and returns valid HTML.
+- Ensure that all available API endpoints are clearly listed.
+- Validate that all endpoint links are present and correctly formatted.
+
+Other usability tests are conducted by human interaction review.
 
 ---
 

@@ -1,28 +1,37 @@
-name: Run Tests
+name: CI
 
 on:
   push:
   pull_request:
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: "3.11"
 
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt
+    - name: Upgrade pip
+      run: pip install --upgrade pip
+
+    - name: Install runtime dependencies
+      run: pip install -r requirements.txt
+
+    - name: Install test dependencies
+      run: pip install -r requirements-dev.txt
 
     - name: Run unit + integration tests
       run: |
         export PYTHONPATH=$PYTHONPATH:$(pwd)
         pytest -v
+          
+    - name: Build Docker image (tests run inside Docker)
+      working-directory: ${{ github.workspace }}
+      run: docker build -t wonderfulapp .
+

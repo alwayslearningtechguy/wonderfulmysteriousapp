@@ -22,7 +22,6 @@ Manually visit or curl:
 - `/api/fortune`
 - `/api/submit`
 - `/api/favorites` (GET + POST)
-- `/version` (if implemented)
 
 Each should return valid JSON and the correct status code.
 
@@ -31,8 +30,8 @@ Each should return valid JSON and the correct status code.
 ## 2. Manual Rate Limiting Checks
 
 ### 2.1 Enforcement
-- Send 10 quick requests to any endpoint → expect `200`.
-- Send an 11th request → expect `429`.
+- Send 100 quick requests to any endpoint → expect `200`.
+- Send an 101st request → expect `429`.
 
 ### 2.2 Reset Behavior
 - Hit the limit.

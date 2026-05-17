@@ -6,7 +6,7 @@ import random
 
 from app.rate_limiter import rate_limiter
 
-app = FastAPI(title="Wonderful and Mysterious API v2.0")
+app = FastAPI(title="Wonderful and Mysterious API v3.0")
 
 # Serve static files (CSS, JS, images) from app/static/
 app.mount("/static", StaticFiles(directory="app/static"), name="static")

@@ -1,6 +1,6 @@
 # WonderfulMysteriousApp
 
-A self-contained FastAPI application that exposes several fun and useful endpoints — weather data, insights, fortunes, data submission, and user favorites — all backed by in-memory storage with no external service dependencies.
+A self-contained FastAPI application that exposes several fun and useful endpoints — weather data, insights, fortunes, data submission, and user favorites — all backed by in-memory storage with no substantial external service dependencies.
 
 ## Tech Stack
 
@@ -39,7 +39,7 @@ WonderfulMysteriousApp/
 
 > **Note:** The favorites endpoint stores integer IDs only — passing anything other than a whole number will return a `422 Unprocessable Entity` error. These IDs are intended to correspond to the `id` values returned by the `/api/insight` and `/api/fortune` endpoints.
 
-> Rate limiting is enforced globally via middleware. Exceeding the limit returns `429 Too Many Requests`. The best way to try out these endpoints is using Swagger: http://localhost:8000/docs 
+> Rate limiting is enforced globally via middleware. Exceeding the limit returns `429 Too Many Requests`. In the latest build, a graphical front end is provided so that users can use this web app without requiring the use of swagger.
 
 ## Getting Started
 
@@ -75,11 +75,11 @@ pytest tests/
 pytest tests/ -v
 ```
 
-The test suite includes unit tests, integration tests (via FastAPI's `TestClient`), security tests (input sanitization, rate limiting), and negative tests for invalid inputs.
+The test suite includes unit tests, integration tests (via FastAPI's `TestClient`), security tests (input sanitization, rate limiting), usability, and negative tests for invalid inputs.
 
 ## CI
 
-The GitHub Actions pipeline automatically installs dependencies, sets `PYTHONPATH`, and runs the full test suite on every push. A failing test fails the build.
+The GitHub Actions pipeline automatically runs the full test suite on every push. A failing test fails the build. This functionality has also been integrated with the dockerfile.
 
 ## Documentation
 
