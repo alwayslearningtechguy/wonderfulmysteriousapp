@@ -79,7 +79,7 @@ The test suite includes unit tests, integration tests (via FastAPI's `TestClient
 
 ## CI
 
-The GitHub Actions pipeline automatically installs dependencies, sets `PYTHONPATH`, and runs the full test suite on every push. A failing test fails the build. This functionality has not yet been extended to the dockerfile, but is in the works.
+The GitHub Actions pipeline automatically runs the full test suite on every push. A failing test fails the build. This functionality has also been integrated with the dockerfile.
 
 ## Documentation
 
