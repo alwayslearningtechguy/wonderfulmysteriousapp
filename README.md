@@ -54,7 +54,7 @@ WonderfulMysteriousApp/
 >
 > **Note:** `POST /api/submit` validates the request body and returns `201 Created` with the submitted payload echoed back. It does **not** persist data or interact with the favorites list. Input is **not** sanitized — submitted values including special characters are returned as-is.
 >
-> **Note:** Rate limiting is enforced globally via middleware at **100 requests per window** per client IP. Exceeding the limit returns `429 Too Many Requests`. A graphical frontend is provided at `/` so the API can be used without Swagger.
+> **Note:** Rate limiting is enforced globally via middleware at **100 requests per window** per client IP (this must be achieved in the designated time window). Exceeding the limit returns `429 Too Many Requests`. A graphical frontend is provided at `/` so the API can be used without Swagger.
 
 ## Getting Started
 
