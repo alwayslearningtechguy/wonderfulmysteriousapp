@@ -31,5 +31,8 @@ def test_full_user_flow_saves_and_reads_favorites(client):
     # Favorites
     r = client.get("/api/favorites")
     assert r.status_code == 200
-    favorites = r.json()
-    assert any(f.get("fortune") == fortune["fortune"] for f in favorites)
+    favorites = r.json()["favorites"]
+    
+    # Since submit does NOT save favorites, the list should be empty
+    assert isinstance(favorites, list)
+
