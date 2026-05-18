@@ -9,9 +9,7 @@ The following areas require manual validation because they involve UI rendering,
 
 All manual UI testing for the Wonderful Mysterious App was performed on a desktop/laptop environment (Chrome and Firefox on Windows/macOS). The application runs locally inside a Docker container and is accessed via `http://localhost:8000`, which is only reachable from the host machine.
 
-Because the app is not deployed to a public network and mobile/tablet devices cannot access the local Docker container without additional networking configuration, mobile and tablet testing were not performed. This limitation does not impact the assignment requirements, as the rubric does not mandate responsive or cross‑device UI validation.
-
-Desktop browser testing fully satisfies the manual testing expectations for this project.
+Because the app is not deployed to a public network and mobile/tablet devices cannot access the local Docker container without additional networking configuration, mobile and tablet testing were not performed.
 
 ---
 
