@@ -15,15 +15,27 @@ A self-contained FastAPI application that exposes several fun and useful endpoin
 
 ```
 WonderfulMysteriousApp/
-├── app/                    # Application source code
-├── tests/                  # Unit, integration, and security tests
-├── .github/workflows/      # CI pipeline
-├── Dockerfile
-├── requirements.txt
-├── Test Plan.md
-├── Test Strategy.md
-├── Manual_Testing.md
-└── Updated Test Report.md
+│
+├── app/
+│   ├── main.py
+│   ├── rate_limiter.py
+│   ├── test_utils.py
+│   └── ...
+│
+├── tests/
+│   ├── conftest.py              # Unit + integration fixtures
+│   ├── unit/
+│   ├── integration/
+│   └── e2e/
+│       ├── conftest.py          # E2E server + client fixtures
+│       ├── test_e2e_core_flow.py
+│       └── test_e2e_health.py
+│
+├── GoldenPaths.md               # Golden path analysis
+├── E2E_Test_Report.md           # E2E test execution summary
+├── Manual_Testing.md            # General manual testing
+├── E2E_Manual_Testing.md        # Manual UI testing beyond automation
+└── README.md
 ```
 
 ## API Endpoints
