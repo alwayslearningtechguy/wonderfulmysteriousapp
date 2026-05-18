@@ -16,12 +16,17 @@ def test_full_user_flow_saves_and_reads_favorites(client):
 
     # Submit
     payload = {
-        "weather": weather,
-        "insight": insight["insight"],
-        "fortune": fortune["fortune"],
+        "user": "e2e-test-user",
+        "data": {
+            "weather": weather,
+            "insight": insight["insight"],
+            "fortune": fortune["fortune"],
+        }
     }
+    
     r = client.post("/api/submit", json=payload)
-    assert r.status_code == 200
+    assert r.status_code == 201
+
 
     # Favorites
     r = client.get("/api/favorites")
