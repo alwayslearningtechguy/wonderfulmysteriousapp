@@ -107,7 +107,7 @@ POST → GET read-back cycle confirms the in-memory store is working correctly.
 
 ### Steps
 
-1. Send 100 requests to any endpoint from the same IP — all should return `200`
+1. Send 100 requests to any endpoint from the same IP — all should return `200`. This must be done in a small window of time (10 seconds - Good luck clicking)
 2. Send the 101st request — expect `429 Too Many Requests` with `{"detail": "Too Many Requests"}`
 3. Wait for the rate limit window to expire — confirm requests return `200` again
 
@@ -115,8 +115,7 @@ POST → GET read-back cycle confirms the in-memory store is working correctly.
 
 Rate limiting is global middleware that gates every single endpoint. If it breaks
 in either direction — too permissive (never blocks) or too aggressive (blocks
-legitimate traffic) — the entire API is affected. The limit is **100 requests
-per window**, not 10.
+legitimate traffic) — the entire API is affected. 
 
 ---
 
