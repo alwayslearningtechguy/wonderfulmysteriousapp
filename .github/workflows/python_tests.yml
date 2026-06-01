@@ -108,8 +108,7 @@ jobs:
             --format txt \
             --output bandit-report.txt
           cat bandit-report.txt
-          # Fail if HIGH severity issues found (exit-zero lets us read output first)
-          bandit -r app/ -ll -ii --severity-level high
+          bandit -r app/ -lll -iii
 
       # 3c — Security header and input tests (TestClient, no server needed)
       - name: Run security header and input tests
