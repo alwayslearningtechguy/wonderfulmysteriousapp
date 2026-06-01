@@ -135,8 +135,8 @@ jobs:
           target: "http://localhost:8000"
           rules_file_name: ".zap/rules.tsv"
           cmd_options: "-I"
-          fail_action: false
-          artifact_name: ""
+          artifact_name: zap-baseline-report
+        continue-on-error: true  # Report uploaded; review manually on first run
 
       - name: Upload security reports
         if: always()
