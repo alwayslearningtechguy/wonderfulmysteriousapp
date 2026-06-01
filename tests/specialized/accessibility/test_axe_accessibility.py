@@ -15,8 +15,9 @@ These tests require a live server on port 8000. Start it first:
     uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 API note (axe-playwright-python 0.1.x):
-    axe.run(page) returns a plain dict, not a typed object.
-    Access results as results["violations"], not results.violations.
+    axe.run(page) returns an AxeResults object.
+    Violations are accessed via results.response["violations"].
+    The library also exposes results.violations_count and results.generate_report().
 """
 
 import pytest
@@ -34,6 +35,11 @@ pytestmark = pytest.mark.skipif(
     not AXE_AVAILABLE,
     reason="axe-playwright-python not installed. Run: pip install axe-playwright-python"
 )
+
+
+def get_violations(results) -> list:
+    """Extract violations list from AxeResults object."""
+    return results.response["violations"]
 
 
 def format_violations(violations: list) -> str:
@@ -62,7 +68,7 @@ def test_landing_page_no_critical_accessibility_violations(page: Page):
     page.wait_for_load_state("networkidle")
 
     results = axe.run(page)
-    violations = results["violations"]
+    violations = get_violations(results)
 
     critical = [v for v in violations if v.get("impact") in ("critical", "serious")]
     moderate = [v for v in violations if v.get("impact") in ("moderate", "minor")]
@@ -94,8 +100,7 @@ def test_landing_page_wcag_21_aa_compliance(page: Page):
         page,
         options={"runOnly": {"type": "tag", "values": ["wcag2a", "wcag2aa", "wcag21aa"]}}
     )
-    violations = results["violations"]
-
+    violations = get_violations(results)
     blocking = [v for v in violations if v.get("impact") in ("critical", "serious")]
 
     assert len(blocking) == 0, (
@@ -117,7 +122,7 @@ def test_colour_contrast_sufficient(page: Page):
         page,
         options={"runOnly": {"type": "rule", "values": ["color-contrast"]}}
     )
-    violations = results["violations"]
+    violations = get_violations(results)
 
     assert len(violations) == 0, (
         f"Colour contrast violations:{format_violations(violations)}\n"
@@ -139,7 +144,7 @@ def test_form_elements_have_labels(page: Page):
         page,
         options={"runOnly": {"type": "rule", "values": ["label"]}}
     )
-    violations = results["violations"]
+    violations = get_violations(results)
 
     assert len(violations) == 0, (
         f"Form label violations:{format_violations(violations)}"
@@ -148,7 +153,7 @@ def test_form_elements_have_labels(page: Page):
 
 # ---------------------------------------------------------------------------
 # 5. Keyboard / focus accessibility
-#    focus-trap is not a valid axe rule ID — replaced with valid rules:
+#    Uses valid axe-core rule IDs:
 #    - scrollable-region-focusable: scrollable regions must be keyboard reachable
 #    - tabindex: elements must not have tabindex > 0 (breaks natural focus order)
 # ---------------------------------------------------------------------------
@@ -171,7 +176,7 @@ def test_keyboard_focus_accessible(page: Page):
             }
         }
     )
-    violations = results["violations"]
+    violations = get_violations(results)
 
     assert len(violations) == 0, (
         f"Keyboard focus violations:{format_violations(violations)}"
