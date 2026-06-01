@@ -1,4 +1,4 @@
-# WonderfulMysteriousApp
+# WonderfulMysteriousApp 3.1
 
 A self-contained FastAPI application that exposes several fun and useful endpoints — weather data, insights, fortunes, data submission, and user favorites — all backed by in-memory storage with no external service dependencies.
 
