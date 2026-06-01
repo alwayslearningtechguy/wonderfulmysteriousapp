@@ -81,6 +81,10 @@ jobs:
   security-tests:
     runs-on: ubuntu-latest
     needs: build-and-test
+    permissions:
+      contents: read
+      issues: write
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
