@@ -27,6 +27,7 @@ WonderfulMysteriousApp/
 │   ├── conftest.py              # Unit + integration fixtures
 │   ├── unit/                    # There are several unit tests in the directory
 │   ├── integration/             # There are several integration tests in the directory
+│   ├── specialized/             # There are several specialized tests in the directory
 │   └── e2e/
 │       ├── conftest.py          # E2E server + client fixtures
 │       ├── test_e2e_core_flow.py
@@ -36,6 +37,9 @@ WonderfulMysteriousApp/
 ├── Golden Paths.md              # Golden path analysis
 ├── E2E Test Report.md           # E2E test execution summary
 ├── E2E Manual Testing.md        # Manual UI testing beyond automation
+├── Test Plan.md                 # Test Plan Document
+├── Test Configuration Matrix.md # Describes the various configurations your product should be tested in
+├── Common Production Issues.md  # Describes common issues in production for your type of product
 └── README.md
 ```
 
@@ -55,6 +59,8 @@ WonderfulMysteriousApp/
 > **Note:** `POST /api/submit` validates the request body and returns `201 Created` with the submitted payload echoed back. It does **not** persist data or interact with the favorites list. Input is **not** sanitized — submitted values including special characters are returned as-is.
 >
 > **Note:** Rate limiting is enforced globally via middleware at **100 requests per window** per client IP (this must be achieved in the designated time window). Exceeding the limit returns `429 Too Many Requests`. A graphical frontend is provided at `/` so the API can be used without Swagger.
+>
+> > **Note:** /health endpoint is used for testing purposes only.
 
 ## Getting Started
 
