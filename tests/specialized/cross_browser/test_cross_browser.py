@@ -107,28 +107,32 @@ def test_page_contains_get_and_post_labels(page: Page):
 
 def test_weather_get_button_returns_response(page: Page):
     """
-    Clicking the Weather GET button should populate a response container
-    with JSON containing the 'city' key.
+    Clicking the Weather 'Send GET Request' link fires the fetch call and
+    populates the response container with JSON containing the 'city' key.
+
+    The landing page uses <a class="link-btn"> elements (not <button>) to
+    trigger API calls via JavaScript onclick handlers. The weather card is
+    opened by default (first .api-card gets class 'open' on load), so the
+    link is immediately visible and clickable.
     """
     page.goto(BASE_URL)
     page.wait_for_load_state("networkidle")
 
-    # Find and click the first button that sends a weather request.
-    # Adjust the selector to match your actual HTML structure.
-    weather_section = page.locator("section, div, details").filter(
-        has_text="/api/weather"
-    ).first
-    button = weather_section.get_by_role("button").first
-    button.click()
+    # The weather card is the first .api-card and is open by default.
+    # Its trigger is an <a class="link-btn"> inside #weather.
+    weather_card = page.locator("#weather")
 
-    # Wait for a response container to update — allow up to 5 seconds
-    page.wait_for_timeout(2000)
+    # Click the Send GET Request link inside the weather card
+    send_link = weather_card.locator("a.link-btn").first
+    send_link.click()
 
-    # The response container should now contain JSON with 'city'
-    response_container = weather_section.locator(
-        "[class*='response'], [id*='response'], pre, code"
-    ).first
-    expect(response_container).to_contain_text("city", timeout=5000)
+    # Wait for the response container to become visible
+    response_container = page.locator("#weather-response-container")
+    expect(response_container).to_be_visible(timeout=5000)
+
+    # Confirm the response text contains the 'city' key
+    response_text = page.locator("#weather-response-text")
+    expect(response_text).to_contain_text("city", timeout=5000)
 
 
 # ---------------------------------------------------------------------------
