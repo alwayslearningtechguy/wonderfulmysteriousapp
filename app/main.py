@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import random
-
+from pathlib import Path
 from app.rate_limiter import rate_limiter
 
 app = FastAPI(title="Wonderful and Mysterious API v3.0")
@@ -185,13 +185,42 @@ async def rate_limit_middleware(request: Request, call_next):
 
 
 # ---------------------------
+# Security Headers
+# ---------------------------
+@app.middleware("http")
+async def security_headers_middleware(request, call_next):
+    """Inject standard HTTP security headers into every response."""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Content-Security-Policy"] = (
+    "default-src 'self'; "
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+    "font-src https://fonts.gstatic.com; "
+    "script-src 'self' 'unsafe-inline';"
+)
+    response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+    response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
+    response.headers["Cross-Origin-Embedder-Policy"] = "require-corp"
+    response.headers["Permissions-Policy"] = (
+    "camera=(), microphone=(), geolocation=(), payment=()"
+)
+    response.headers["Cache-Control"] = "no-store"
+    return response
+
+
+# ---------------------------
 # Landing Page
 # ---------------------------
 
+STATIC_DIR = Path(__file__).parent / "static"
+
 @app.get("/", response_class=HTMLResponse)
 async def landing_page():
-    with open("app/static/index.html", "r") as f:
-        return HTMLResponse(content=f.read(), status_code=200)
+    index_path = STATIC_DIR / "index.html"
+    return HTMLResponse(content=index_path.read_text(), status_code=200)
+
 
 
 # ---------------------------
@@ -240,3 +269,13 @@ async def add_favorite(item: FavoriteItem):
 @app.get("/api/favorites")
 async def get_favorites():
     return {"favorites": db["favorites"]}
+
+
+@app.get("/health")
+async def health_check():
+    """
+    Lightweight health check endpoint.
+    Returns 200 when the application is running and able to serve requests.
+    Used by Docker HEALTHCHECK, load balancers, and uptime monitors.
+    """
+    return {"status": "ok"}

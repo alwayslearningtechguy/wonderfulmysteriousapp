@@ -15,7 +15,7 @@
 	  --border: #1f2628;
 	  --accent: #c8f542;
 	  --accent2: #42d4f5;
-	  --muted: #4a5560;
+	  --muted: #7a8f9e;  /* was #4a5560 — increased for WCAG AA contrast */
 	  --text: #e8ede8;
 	  --text-dim: #8a9ba8;
 	  --get: #42d4f5;
@@ -487,8 +487,8 @@
 
   <form id="weather-test-form" onsubmit="handleWeatherTest(event)" style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin-bottom:16px;">
 	<div style="display:flex;flex-direction:column;gap:4px;">
-	  <label style="font-size:11px;color:var(--text-dim);">City (optional):</label>
-	  <input type="text" id="weather-city" placeholder="Seattle" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
+	  <label for style="font-size:11px;color:var(--text-dim);">City (optional):</label>
+	  <input type="text" id="weather-city"  aria-label="City" placeholder="Seattle" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
 	</div>
 
 	<a class="link-btn" href="/api/weather" onclick="document.getElementById('weather-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
@@ -561,8 +561,8 @@
 
   <form id="insight-test-form" onsubmit="handleInsightTest(event)" style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin-bottom:16px;">
 	<div style="display:flex;flex-direction:column;gap:4px;">
-	  <label style="font-size:11px;color:var(--text-dim);">Topic (optional):</label>
-	  <input type="text" id="insight-topic" placeholder="general" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
+	  <label for style="font-size:11px;color:var(--text-dim);">Topic (optional):</label>
+	  <input type="text" id="insight-topic" aria-label="Topic" placeholder="general" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
 	</div>
 
 	<a class="link-btn" href="/api/insight" onclick="document.getElementById('insight-test-form').requestSubmit(); event.preventDefault();" style="justify-content:center;cursor:pointer;">
@@ -696,12 +696,12 @@
 		
 		<form id="submit-test-form" onsubmit="handleApiSubmit(event)" style="display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin-bottom: 16px;">
 		  <div style="display: flex; flex-direction: column; gap: 4px;">
-			<label style="font-size: 11px; color: var(--text-dim);">User Name:</label>
-			<input type="text" id="submit-username" value="alice" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
+			<label for style="font-size: 11px; color: var(--text-dim);">User Name:</label>
+			<input type="text" id="submit-username" aria-label="User Name" value="alice" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
 		  </div>
 		  <div style="display: flex; flex-direction: column; gap: 4px;">
-			<label style="font-size: 11px; color: var(--text-dim);">Score (Data):</label>
-			<input type="number" id="submit-score" value="99" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
+			<label for style="font-size: 11px; color: var(--text-dim);">Score (Data):</label>
+			<input type="number" id="submit-score" aria-label="Score" value="99" required style="background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px; font-family: 'DM Mono', monospace; font-size: 12px; border-radius: 3px;">
 		  </div>
 		  
 		  <a class="link-btn" href="/api/submit" onclick="document.getElementById('submit-test-form').requestSubmit(); event.preventDefault();" style="justify-content: center; cursor: pointer;">
@@ -772,8 +772,8 @@
 			style="display:flex;flex-direction:column;gap:14px;max-width:420px;margin-bottom:18px;">
 
 		<div style="display:flex;flex-direction:column;gap:6px;">
-		  <label style="font-size:11px;color:var(--text-dim);">Favorite ID:</label>
-		  <input type="number" id="favorites-post-id" value="42" required
+		  <label for style="font-size:11px;color:var(--text-dim);">Favorite ID:</label>
+		  <input type="number" id="favorites-post-id" aria-label="Favorite ID" value="42" required
 				style="background:var(--bg);border:1px solid var(--border);color:var(--text);
 					  padding:9px;font-family:'DM Mono',monospace;font-size:12px;border-radius:3px;">
 		</div>

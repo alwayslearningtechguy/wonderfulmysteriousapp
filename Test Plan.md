@@ -1,211 +1,225 @@
-# Test Plan
+# Test Plan — Wonderful Mysterious App v3.1
 
-## 1. Introduction
-This Test Plan outlines the testing strategy for the *Wonderful and Mysterious API*, a FastAPI-based application that provides several endpoints including weather information, insights, fortunes, data submission, and user favorites. The purpose of this plan is to ensure that all API functionality is validated through unit tests, integration tests, security tests, and negative tests.
+## 1. Overview
 
-The API is fully self-contained and does **not** rely on external services. All data is generated internally or stored in an in-memory structure.  
-Rate limiting is implemented at the middleware layer to prevent excessive request volume.
-
----
-
-## 2. Scope
-This Test Plan covers:
-
-- Functional testing of all API endpoints  
-- Unit testing of internal logic  
-- Integration testing of HTTP request/response behavior  
-- Security testing (sanitization, error hygiene, rate limiting)  
-- Negative testing for invalid inputs  
-- Basic load/burst behavior  
-
-Out of scope:
-
-- Full penetration testing  
-- External API failure simulation (no external APIs exist)  
-- Distributed load testing  
-- Authentication/authorization testing  
-- TLS/HTTPS configuration testing  
+This document defines the testing approach, scope, objectives, and coverage
+requirements for the *Wonderful and Mysterious API*. It covers all testing
+layers: unit, integration, end-to-end, and specialized testing added in the
+current release cycle.
 
 ---
 
-## 3. Features to Be Tested
+## 2. Objectives
 
-### 3.1 `/api/weather` (GET)
-- Returns mock weather data  
-- Accepts optional `city` parameter  
-- Handles unusual or unexpected city input  
-- Behaves correctly under rate limiting  
-
-### 3.2 `/api/insight` (GET)
-- Returns a random insight message  
-- Accepts optional `topic` parameter  
-- Behaves correctly under rate limiting  
-
-### 3.3 `/api/fortune` (GET)
-- Returns a random fortune  
-- Ensures response contains required fields  
-- Behaves correctly under rate limiting  
-
-### 3.4 `/api/submit` (POST)
-- Accepts structured payload (`user`, `data`)  
-- Validates payload structure  
-- Handles sanitization edge cases  
-- Behaves correctly under rate limiting  
-
-### 3.5 `/api/favorites` (POST)
-- Accepts a favorite item ID  
-- Updates in-memory favorites list  
-- Returns updated list  
-- Behaves correctly under rate limiting  
-
-### 3.6 `/api/favorites` (GET)
-- Returns current favorites list  
-- Handles empty and populated states  
-- Behaves correctly under rate limiting  
+- Verify all API endpoints return correct HTTP status codes, JSON structures,
+  and field types
+- Confirm rate limiting enforces the 100-request-per-window global limit
+- Confirm the landing page is reachable, documents all endpoints, and meets
+  usability and accessibility requirements
+- Confirm the application tolerates malformed and hostile input without crashing
+  or leaking internal details
+- Confirm standard HTTP security headers are present on all responses
+- Confirm no known vulnerabilities exist in declared dependencies
+- Confirm the application meets WCAG 2.1 AA accessibility standards
+- Confirm the landing page functions correctly across Chromium and Firefox
+- Confirm p95 response time remains below 200ms under 10 concurrent users
 
 ---
 
-## 4. Suspension & Resumption Criteria
-* **Suspend:** If the Docker container fails to stay in a "Running" state or if `404 Not Found` occurs on all endpoints.  
-* **Resume:** Once the `main.py` routing or `Dockerfile` configuration is corrected and the container restarts successfully.
+## 3. Scope
+
+### 3.1 In Scope
+
+| Area | Coverage |
+|---|---|
+| All API endpoints (GET and POST) | Unit, integration, E2E |
+| Rate limiter (global, per-IP) | Unit, integration, E2E |
+| Landing page (HTML, links, methods, parameters) | Integration, E2E, cross-browser |
+| Input validation (422 on missing fields) | Integration, E2E |
+| Input tolerance (hostile/oversized input) | Security tests |
+| HTTP security headers | Security tests |
+| Dependency vulnerabilities | pip-audit (CI) |
+| Static code analysis | Bandit (CI) |
+| OWASP ZAP passive scan | CI (baseline) |
+| WCAG 2.1 AA accessibility | axe-core, Playwright |
+| Cross-browser UI (Chromium, Firefox) | Playwright |
+| Responsive layout (320px – 1440px) | Playwright |
+| Performance (p95 < 200ms, 10 users) | Locust (CI) |
+
+### 3.2 Out of Scope
+
+| Area | Reason |
+|---|---|
+| Safari browser | macOS runner required; tested manually |
+| Mobile / tablet devices | App not network-accessible from physical devices |
+| OWASP ZAP full active scan | Requires manual execution; see manual testing doc |
+| Penetration testing | Not in scope for this release |
+| Persistent storage | App uses in-memory storage by design |
+| Authentication / authorisation | Not implemented |
+| TLS / HTTPS | Not configured for this release |
+| Internet Explorer | End-of-life |
 
 ---
 
-## 5. Test Approach
+## 4. Test Layers
 
-### 5.1 Unit Testing
-Unit tests directly call the endpoint functions without HTTP routing.  
-They validate:
+### 4.1 Unit Tests (`tests/unit/`)
 
-- Default parameter behavior  
-- Custom parameter behavior  
-- Response structure  
-- Randomized output fields  
-- In-memory database behavior  
-- Payload validation  
+Test individual async route handlers in isolation by importing them directly
+from `app.main`. State is reset before every test via the `autouse` fixture
+in `conftest.py`.
 
-Unit tests ensure internal logic is correct and isolated from FastAPI routing.
+**Coverage:**
+- `get_weather` — default and custom city
+- `get_insight` — default topic, known topic, unknown topic fallback, available topics
+- `get_fortune` — structure, field types, id range, content from pool
+- `post_submit` — payload structure and echo
+- `add_favorite` / `get_favorites` — state mutation and read
+- `RateLimiter` — allows within limit, blocks after limit
 
----
+### 4.2 Integration Tests (`tests/integration/`)
 
-### 5.2 Integration Testing
-Integration tests validate:
+Test all endpoints via `FastAPI.TestClient`. State is reset before every test
+via the `autouse` fixture.
 
-- HTTP status codes  
-- JSON response structure  
-- Query parameter handling  
-- POST body validation  
-- Stateful behavior (`favorites`)  
-- Serialization of Pydantic models  
-- Rate limiting enforcement  
+**Coverage:**
+- All endpoints: correct status codes and JSON structure
+- Fortune, insight: field types, non-empty strings, fallback behavior
+- Weather: default and custom city
+- Submit: payload echo, missing field 422
+- Favorites: add and read state
+- Rate limiting: 100 allowed, 101st blocked
+- Security: API tolerates and echoes script-like input without crashing
+- Usability: landing page reachable, returns HTML, documents all endpoints
+  with links, HTTP methods, and query parameters
 
-Each endpoint has its own integration test file for clarity and maintainability.
+### 4.3 E2E Tests (`tests/e2e/`)
 
-Note: Some usability tests are automated and consequently tested here too. They address the following:
+Test the full stack against a live Uvicorn subprocess on port 8000. A second
+isolated subprocess on port 8001 is used exclusively for the rate limit E2E
+test to prevent budget contamination.
 
-- Verify that the landing page is reachable and returns valid HTML.
-- Ensure that all available API endpoints are clearly listed.
-- Validate that all endpoint links are present and correctly formatted.
+**Coverage:**
+- Full user flow (weather → insight → fortune → submit → favorites)
+- Health check on all GET endpoints
+- Schema validation on all endpoint responses
+- Favorites POST/GET read-back, input validation (422)
+- Submit field assertions, missing field 422, isolation from favorites
+- Rate limit: 100 allowed, 101st blocked, per-IP isolation
+- Landing page: 200, HTML content-type, all endpoints linked
 
-Other usability tests are conducted by human interaction review.
+### 4.4 Specialized Tests (`tests/specialized/`)
 
----
+#### Security (`tests/specialized/security/`)
 
-### 5.3 Security Testing
+Tests run via `TestClient` — no live server required.
 
-#### 5.3.1 Input Sanitization
-Tests ensure:
+| Area | Tests |
+|---|---|
+| HTTP security headers | X-Content-Type-Options, X-Frame-Options, Referrer-Policy present and correct on GET and POST responses |
+| Input size limits | Oversized user field, oversized data dict, long city name, long topic — all return non-500 |
+| Unsupported HTTP methods | POST on GET-only routes, DELETE/PUT on favorites — return 405 |
+| Error response hygiene | 422 and 405 responses contain no stack traces, file paths, or internal details |
+| Content-type enforcement | Form data and plain text to JSON endpoints return 422, not 500 |
 
-- Script-like input does not crash the API  
-- No stack traces are leaked  
-- No unsafe reflection of user input  
+Additional security checks run in CI outside pytest:
 
-#### 5.3.2 Rate Limiting
-Rate limiting is implemented globally via middleware.  
-Tests validate:
+| Tool | Target | Failure condition |
+|---|---|---|
+| pip-audit | `requirements.txt` | Any known CVE in declared dependencies |
+| Bandit | `app/` source | High severity, high confidence findings |
+| OWASP ZAP baseline | Running app on port 8000 | Any FAIL-level alert per `.zap/rules.tsv` |
 
-- Requests within the allowed window return `200`  
-- Requests exceeding the limit return `429 Too Many Requests`  
-- Rate limiting applies consistently across endpoints  
-- Rate limiting resets after the configured time window  
+#### Performance (`tests/specialized/performance/`)
 
-#### 5.3.3 Error Message Hygiene
-Tests ensure:
+Locust load test. Pass/fail enforced via the `quitting` event hook.
 
-- No internal error messages are exposed  
-- No environment variables leak  
-- No stack traces appear in responses  
+| Parameter | Value |
+|---|---|
+| Tool | Locust |
+| Concurrent users | 10 |
+| Spawn rate | 2 users/second |
+| Duration | 30 seconds |
+| p95 target | < 200ms |
+| Error rate target | < 1% |
 
----
+#### Cross-Browser (`tests/specialized/cross_browser/`)
 
-### 5.4 Negative Testing
-Negative tests validate how the API handles invalid or malformed input.
+Playwright tests run against a live server. CI matrix: Chromium and Firefox.
+Safari is manual only.
 
-Examples include:
+| Area | Tests |
+|---|---|
+| Page load | 200 response, no JS console errors |
+| Card presence | All 5 endpoint paths visible |
+| Interaction | Weather GET button fires and populates response container |
+| Responsive layout | No horizontal overflow at 320, 480, 768, 1440px |
+| Accessibility (basic) | lang attribute, image alt text, button names, input labels, main landmark, h1 hierarchy |
 
-- Invalid city names  
-- Empty or malformed JSON payloads  
-- Missing required fields  
-- Invalid types  
-- Extremely long strings  
-- Unexpected query parameters  
+#### Accessibility (`tests/specialized/accessibility/`)
 
-These tests ensure the API fails gracefully and predictably.
+axe-core scans via `axe-playwright-python`. Run against Chromium and Firefox.
 
----
-
-### 5.5 Load & Stress Testing (Scaled Down)
-Because the API uses no external services, load testing focuses on:
-
-- Burst request behavior  
-- Stateful behavior under repeated access  
-- Ensuring the API does not crash under rapid calls  
-- Rate limiting behavior under load  
-
-Full performance benchmarking is intentionally out of scope.
-
----
-
-## 6. Test Environment
-Tests run using:
-
-- Python 3.11  
-- FastAPI TestClient  
-- Pytest  
-- In-memory database (`db` dict)  
-- In-memory rate limiter  
-
-The CI pipeline:
-
-- Installs dependencies  
-- Sets `PYTHONPATH`  
-- Runs all unit, integration, and security tests  
-- Fails the build if any test fails  
+| Test | Standard |
+|---|---|
+| No critical/serious violations | axe-core all rules |
+| WCAG 2.1 AA compliance | wcag2a, wcag2aa, wcag21aa tags |
+| Colour contrast | WCAG AA 4.5:1 minimum |
+| Form labels | All inputs have programmatic labels |
+| Keyboard focus | No keyboard traps, no tabindex > 0 |
 
 ---
 
-## 7. Test Deliverables
-- Unit test files for each endpoint  
-- Integration test files for each endpoint  
-- Security test files (sanitization, rate limiting)  
-- Negative test cases  
-- CI test results  
+## 5. Test Data
+
+All test data is hardcoded or generated within tests. No external data sources,
+databases, or network calls are used. The application itself uses hardcoded data
+pools (`WEATHER_DATA`, `INSIGHTS`, `FORTUNES`) — no mocking of external APIs
+is required.
 
 ---
 
-## 8. Risks and Mitigations
+## 6. Entry and Exit Criteria
 
-### Risk: Randomized output may cause inconsistent tests  
-**Mitigation:** Tests validate structure, not specific random values.
+### Entry Criteria
+- All source changes committed to the branch under test
+- `requirements.txt` and `requirements-dev.txt` up to date
+- Docker image builds successfully (Stage 1 test run must pass)
 
-### Risk: In-memory database may retain state across tests  
-**Mitigation:** Tests explicitly reset `db["favorites"]` before use.
-
-### Risk: Rate limiting may block unrelated tests  
-**Mitigation:** Tests reset the rate limiter between runs or use isolated clients.
+### Exit Criteria
+- All automated tests pass (0 failures)
+- No pip-audit CVEs in declared dependencies
+- No Bandit high-severity findings
+- OWASP ZAP baseline scan produces no FAIL-level alerts
+- p95 latency confirmed below 200ms
+- All manual testing procedures in `Manual_Testing.md` and
+  `Specialized_Manual_Testing.md` completed and signed off
 
 ---
 
-## 9. Approval
-This Test Plan reflects the current API design, test suite, and project scope.  
-It should be updated as new endpoints or security features are added.
+## 7. Known Gaps and Accepted Limitations
+
+| Gap | Acceptance rationale |
+|---|---|
+| Duplicate favorites behavior untested | In-memory append-only behavior is simple and observable; low risk |
+| Rate limit window reset not automated | Requires wall-clock wait; impractical in CI; covered manually |
+| Code coverage not measured | No `pytest-cov` configured; known open item for next cycle |
+| Safari not automated | macOS runner not available; covered manually |
+| Screen reader testing manual | Cannot be meaningfully automated; covered manually |
+| Sustained load / memory leak manual | Requires monitored long run; covered manually |
+
+---
+
+## 8. Tools and Dependencies
+
+| Tool | Version | Purpose |
+|---|---|---|
+| pytest | 8.3.5 | Test runner |
+| pytest-asyncio | 0.25.3 | Async test support |
+| httpx | 0.28.1 | HTTP client for E2E tests |
+| anyio | 4.13.0 | Async I/O |
+| locust | 2.32.2 | Load testing |
+| pytest-playwright | 0.5.2 | Browser automation |
+| axe-playwright-python | 0.1.3 | Accessibility scanning |
+| pip-audit | 2.7.3 | Dependency vulnerability scanning |
+| bandit | 1.7.10 | Static security analysis |
