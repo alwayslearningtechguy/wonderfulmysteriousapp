@@ -137,7 +137,7 @@ jobs:
           target: "http://localhost:8000"
           rules_file_name: ".zap/rules.tsv"
           cmd_options: "-I"   # -I = do not fail on warnings, only on errors
-          artifact_name: zap-report
+          artifact_name: zapReport
         continue-on-error: true  # Report uploaded; review manually on first run
 
       - name: Upload security reports
