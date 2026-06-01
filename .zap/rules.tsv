@@ -1,0 +1,34 @@
+# .zap/rules.tsv
+# OWASP ZAP rule configuration for the Wonderful Mysterious App baseline scan.
+#
+# Format: rule_id TAB action TAB comment
+# Actions: IGNORE (never flag), WARN (flag but don't fail), FAIL (fail the build)
+#
+# Start conservative (WARN on everything) and tighten as issues are resolved.
+# Rules flagged WARN appear in the report but do not fail CI.
+# Rules flagged FAIL will break the build if triggered.
+
+# Cookie rules — app has no cookies currently; ignore
+10010	IGNORE	Cookie No HttpOnly Flag — no cookies in this app
+10011	IGNORE	Cookie Without Secure Flag — no cookies in this app
+10054	IGNORE	Cookie with SameSite Attribute Problem — no cookies in this app
+
+# CSP — warn until CSP header is implemented
+10038	WARN	Content Security Policy Header Not Set
+
+# HTTPS — warn; app is HTTP-only in current deployment
+10035	WARN	Strict-Transport-Security Header Not Set
+
+# Info disclosure — fail; these should never appear
+10024	FAIL	Information Disclosure - Sensitive Information in URL
+10025	FAIL	Information Disclosure - Sensitive Information in HTTP Referrer Header
+10027	FAIL	Information Disclosure - Suspicious Comments
+
+# X-Content-Type-Options — fail once middleware is added
+10021	FAIL	X-Content-Type-Options Header Missing
+
+# X-Frame-Options — fail once middleware is added  
+10020	FAIL	Anti-clickjacking Header
+
+# Server version disclosure — warn
+10036	WARN	Server Leaks Version Information via Server HTTP Response Header
