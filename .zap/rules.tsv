@@ -14,7 +14,7 @@
 10054	IGNORE	Cookie with SameSite Attribute Problem — no cookies in this app
 
 # CSP — warn until CSP header is implemented
-10038	WARN	Content Security Policy Header Not Set
+10038	WARN	Content Security Policy Header Not Set — add CSP header
 
 # HTTPS — warn; app is HTTP-only in current deployment
 10035	WARN	Strict-Transport-Security Header Not Set
@@ -32,3 +32,15 @@
 
 # Server version disclosure — warn
 10036	WARN	Server Leaks Version Information via Server HTTP Response Header
+
+# Google Fonts 
+90003	WARN	Sub Resource Integrity — Google Fonts CDN, impractical to fix
+
+# Cross Origin Headers
+90004	WARN	Cross-Origin headers — add CORP/COEP/COOP
+
+# Permisions Policy Header
+10063	WARN	Permissions Policy Header Not Set — add header
+
+# Cache Control
+10049	WARN	Storable and Cacheable Content — add Cache-Control
