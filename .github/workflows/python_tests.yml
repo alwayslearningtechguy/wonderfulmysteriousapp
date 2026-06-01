@@ -137,7 +137,6 @@ jobs:
           cmd_options: "-I"
           fail_action: false
           artifact_name: ""
-          continue-on-error: true  # Report uploaded; review manually on first run
 
       - name: Upload security reports
         if: always()
