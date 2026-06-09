@@ -70,6 +70,17 @@ the async code.
 The lesson: async code requires explicit test infrastructure. `STRICT` mode
 is the right default — it surfaces problems rather than hiding them.
 
+### The Dockerfile as a Local Test Enforcement Mechanism
+
+The multi-stage Dockerfile ensures unit and integration tests run whenever
+anyone builds the image — whether via GitHub Actions, a local `docker build`,
+or after cloning the repo and running Docker Compose. Stage 1 installs both
+runtime and test dependencies and runs `pytest tests/unit tests/integration`
+before Stage 2 produces the runtime image. A failing test breaks the build
+regardless of how or where it is triggered. This means CI is not the only
+gate — the Docker build itself is a test enforcement mechanism available to
+anyone with the source code.
+
 ---
 
 ## 2. CI Pipeline Problems Encountered and Fixed
