@@ -101,16 +101,17 @@ The API will be available at `http://localhost:8000`.
 WonderfulMysteriousApp/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                        # CI/CD pipeline (5 jobs)
+│       └── ci.yml                        # CI/CD pipeline
 ├── .zap/
 │   └── rules.tsv                         # OWASP ZAP scan rule config
 ├── app/
 │   ├── main.py                           # FastAPI application
 │   ├── rate_limiter.py                   # RateLimiter class
-│   ├── security_headers_middleware.py    # HTTP security headers
 │   ├── test_utils.py                     # State reset for tests
+│   ├── __init__.py
 │   └── static/
 │       └── index.html                    # Interactive landing page
+│       └── favicon.ico
 ├── tests/
 │   ├── conftest.py                       # Unit + integration fixtures (autouse reset)
 │   ├── unit/                             # Async handler unit tests
@@ -130,13 +131,13 @@ WonderfulMysteriousApp/
 ├── requirements.txt                      # Runtime dependencies
 ├── requirements-dev.txt                  # Test and dev dependencies
 ├── CI_Reflection.md                      # CI troubleshooting and lessons learned
-├── Common_Production_Issues.md           # Common production risks for this product type
-├── E2E_Test_Report.md                    # E2E-specific test results
-├── Manual_Testing.md                     # Manual test procedures with reasoning
-├── Test_Configuration_Matrix.md          # Device, browser, and OS test matrix
-├── Test_Plan.md                          # Test scope, objectives, and coverage
-├── Test_Strategy.md                      # Testing philosophy and approach
-├── Updated_Test_Report.md               # Full automated test results (all layers)
+├── Common Production Issues.md           # Common production risks for this product type
+├── E2E Test Report.md                    # E2E-specific test results
+├── Manual Testing.md                     # Manual test procedures with reasoning
+├── Test Configuration Matrix.md          # Device, browser, and OS test matrix
+├── Test Plan.md                          # Test scope, objectives, and coverage
+├── Test Strategy.md                      # Testing philosophy and approach
+├── Updated Test Report.md               # Full automated test results (all layers)
 └── README.md
 ```
 
