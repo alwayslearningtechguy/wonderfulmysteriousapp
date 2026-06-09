@@ -199,7 +199,9 @@ async def security_headers_middleware(request, call_next):
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src https://fonts.gstatic.com; "
         "script-src 'self' 'unsafe-inline'; "
-        "form-action 'self';"
+        "form-action 'self'; "
+        "base-uri 'self'; "
+        "object-src 'none';"
     )
     response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
     response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
