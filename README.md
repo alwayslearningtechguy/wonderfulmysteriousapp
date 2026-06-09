@@ -130,14 +130,14 @@ WonderfulMysteriousApp/
 ├── Dockerfile                            # Multi-stage build (test + runtime)
 ├── requirements.txt                      # Runtime dependencies
 ├── requirements-dev.txt                  # Test and dev dependencies
-├── CI Reflection.md                      # CI troubleshooting and lessons learned
-├── Common Production Issues.md           # Common production risks for this product type
-├── E2E Test Report.md                    # E2E-specific test results
-├── Manual Testing.md                     # Manual test procedures with reasoning
-├── Test Configuration Matrix.md          # Device, browser, and OS test matrix
-├── Test Plan.md                          # Test scope, objectives, and coverage
-├── Test Strategy.md                      # Testing philosophy and approach
-├── Updated Test Report.md               # Full automated test results (all layers)
+├── CI_Reflection.md                      # CI troubleshooting and lessons learned
+├── Common_Production_Issues.md           # Common production risks for this product type
+├── E2E_Test_Report.md                    # E2E-specific test results
+├── Manual_Testing.md                     # Manual test procedures with reasoning
+├── Test_Configuration_Matrix.md          # Device, browser, and OS test matrix
+├── Test_Plan.md                          # Test scope, objectives, and coverage
+├── Test_Strategy.md                      # Testing philosophy and approach
+├── Updated_Test_Report.md               # Full automated test results (all layers)
 └── README.md
 ```
 
