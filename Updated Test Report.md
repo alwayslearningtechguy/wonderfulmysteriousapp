@@ -15,7 +15,7 @@ All results in this report are based on the actual GitHub Actions run executed f
 - **anyio:** 4.13.0  
 - **asyncio mode:** STRICT  
 - **Total tests collected:** 35  
-- **Execution time:** *(not provided in log excerpt)*  
+- **Execution time:** 0.28s  
 
 ---
 
