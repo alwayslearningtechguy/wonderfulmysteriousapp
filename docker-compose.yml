@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      target: runtime          # Uses Stage 2 only — no test deps in prod image
+    image: wonderfulapp:latest
+    container_name: wonderful_mysterious_app
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+# Usage:
+#   Start:   docker compose up --build
+#   Stop:    docker compose down
+#   Logs:    docker compose logs -f
+#   Rebuild: docker compose up --build --force-recreate
