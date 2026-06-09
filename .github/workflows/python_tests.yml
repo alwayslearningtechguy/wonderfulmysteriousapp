@@ -131,15 +131,14 @@ jobs:
           sleep 5
 
       # 3d — OWASP ZAP passive baseline scan
-      # Passive scan only — does not send attack payloads, safe for CI.
       - name: OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.12.0
         with:
           target: "http://localhost:8000"
           rules_file_name: ".zap/rules.tsv"
           cmd_options: "-I"
-          artifact_name: zap-baseline-report
-        continue-on-error: true  # Report uploaded; review manually on first run
+          artifact_name: ""          # disables ZAP's own artifact upload
+        continue-on-error: true
 
       - name: Upload security reports
         if: always()
