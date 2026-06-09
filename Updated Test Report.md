@@ -1,4 +1,4 @@
-# Automated Test Validation Report for App Version 3.0 (Updated)
+# Automated Test Validation Report for App Version 3.1 (Updated)
 
 ## Overview
 This report documents the results of executing the automated unit and integration tests for the *Wonderful and Mysterious API* on GitHub Actions. This test report does not reflect the results of the E2E tests. Please see the other document for those results. The purpose of this validation is to confirm that the application behaves according to the Test Plan and that all implemented features function correctly in a real CI environment.
@@ -88,7 +88,7 @@ This confirms:
 - Insight topics behave correctly across default, known, and unknown topic cases, and available topics are listed.  
 - Weather logic handles both default and custom cities.  
 - Favorites list operations behave correctly and maintain state.  
-- Submit logic builds correct payloads and applies sanitization.  
+- Submit logic builds correct payloads and echoes input verbatim.
 - Rate limiter enforces limits correctly in isolation.
 
 ### ✔ All Integration Tests Passed
@@ -111,7 +111,7 @@ This confirms:
 
 ### ✔ Security Tests Passed
 This confirms:
-- Script-like or HTML-like input is sanitized before being returned.  
+- The API accepts script-like input without crashing or leaking internal errors. Input is echoed verbatim — sanitization is the consumer's responsibility.  
 - No unsafe content, stack traces, or internal details are exposed.  
 
 ### ✔ Rate Limiting Tests Passed
