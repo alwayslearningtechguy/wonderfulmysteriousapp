@@ -303,18 +303,39 @@ no 500 errors.
 
 ## 11. Health Check Endpoint
 
-**Steps:**
-1. Start the app.
-2. `curl -f http://localhost:8000/health`
-3. Confirm response: `{"status": "ok"}` with HTTP 200.
-4. Build and run Docker image: `docker run -d -p 8000:8000 wonderfulapp`
-5. After 30 seconds check Docker health:
-   ```bash
-   docker inspect --format='{{.State.Health.Status}}' <container_id>
-   ```
-6. Confirm status is `healthy`.
+**Why manual:** Confirms the `/health` endpoint works correctly and that
+Docker reports the container as healthy using the Python-based healthcheck.
+`python:3.11-slim` does not include `curl`, so the healthcheck uses Python's
+built-in `urllib.request` instead — no additional dependencies required.
 
-**Pass criteria:** `/health` returns 200; Docker reports container as healthy.
+### Steps
+
+1. Verify the endpoint directly:
+```bash
+   curl -f http://localhost:8000/health
+```
+   Confirm response: `{"status": "ok"}` with HTTP 200.
+
+2. Start via Docker Compose:
+```bash
+   docker compose up --build -d
+```
+
+3. Wait 30 seconds, then check status:
+```bash
+   docker inspect --format='{{.State.Health.Status}}' wonderful_mysterious_app
+```
+   Confirm status is `healthy`.
+
+4. Verify the healthcheck command works inside the container:
+```bash
+   docker exec wonderful_mysterious_app \
+     python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+```
+   Confirm it exits without error.
+
+**Pass criteria:** `/health` returns 200; Docker reports container as `healthy`;
+Python urllib healthcheck exits cleanly.
 
 ---
 
