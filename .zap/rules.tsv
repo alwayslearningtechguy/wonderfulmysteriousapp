@@ -43,4 +43,4 @@
 10063	WARN	Permissions Policy Header Not Set — add header
 
 # Cache Control
-10049	WARN	Storable and Cacheable Content — add Cache-Control
+10049	IGNORE	Non-Storable Content — Cache-Control: no-store is intentional
