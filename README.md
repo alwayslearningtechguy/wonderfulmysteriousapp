@@ -130,7 +130,7 @@ WonderfulMysteriousApp/
 ├── Dockerfile                            # Multi-stage build (test + runtime)
 ├── requirements.txt                      # Runtime dependencies
 ├── requirements-dev.txt                  # Test and dev dependencies
-├── CI_Reflection.md                      # CI troubleshooting and lessons learned
+├── CI Reflection.md                      # CI troubleshooting and lessons learned
 ├── Common Production Issues.md           # Common production risks for this product type
 ├── E2E Test Report.md                    # E2E-specific test results
 ├── Manual Testing.md                     # Manual test procedures with reasoning
