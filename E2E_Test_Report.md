@@ -125,11 +125,6 @@ ran at position 22 against its own isolated Uvicorn instance on port 8001 with
 a fresh budget of 100. All 100 requests returned 200; the 101st returned 429
 with `{"detail": "Too Many Requests"}` as expected.
 
-**25 collected vs 24 expected.** The previous report projected 24 tests. The
-actual count is 25 because `test_e2e_core_flow.py` contributes 1 test and
-`test_e2e_health.py` contributes 3, for a combined 4 from existing files plus
-21 from `test_e2e_extended.py`. The count discrepancy in the previous report was
-due to miscounting the extended file as 20 tests when it contains 21.
 
 ---
 
