@@ -50,6 +50,9 @@ docker build -t wonderfulmysteriousapp .
 # Run the container
 docker run -p 8000:8000 wonderfulmysteriousapp
 ```
+> **Note:** The Docker build runs all unit and integration tests during the
+> build process (Stage 1). If any test fails, the build fails and no image
+> is produced. This applies whether building locally or in CI.
 
 ### Run locally (without Docker)
 
