@@ -206,7 +206,7 @@ as obstacles.
 
 ---
 
-### Problem: Colour Contrast Violation
+### Problem: Color Contrast Violation
 
 **Error:** `[SERIOUS] color-contrast: Ensures the contrast between foreground
 and background colors meets WCAG 2 AA contrast ratio thresholds — Element:
