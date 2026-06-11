@@ -75,7 +75,7 @@ security, performance, cross-browser compatibility, and accessibility.
 | Safari (desktop and iOS) | macOS runner not available in CI |
 | Screen reader behavior | Automated tools detect structural issues; only humans can evaluate announcement quality |
 | Keyboard navigation flow | Path-dependent; requires human judgment |
-| Colour contrast of dynamic content | axe-core scans static DOM; JS-populated response containers need human verification |
+| Color contrast of dynamic content | axe-core scans static DOM; JS-populated response containers need human verification |
 | Rate limit window reset | Requires real wall-clock wait; impractical in CI |
 | OWASP ZAP full active scan | Sends attack payloads; not safe to run on every push |
 | Sustained load / memory leak detection | Requires monitored long run with human observation |
@@ -166,7 +166,7 @@ deliver 80% of the value are:
 3. **Performance baseline (Locust)** — the only mechanism that enforces the p95
    < 200ms SLA stated in this document; without it the target is aspirational only.
 
-4. **axe-core accessibility scan** — identified a genuine WCAG AA colour contrast
+4. **axe-core accessibility scan** — identified a genuine WCAG AA color contrast
    violation (`--muted: #4a5560`) during this cycle that would not have been caught
    by any other automated test.
 
