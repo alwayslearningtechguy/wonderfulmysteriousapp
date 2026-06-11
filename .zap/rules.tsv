@@ -15,6 +15,7 @@
 
 # CSP — warn until CSP header is implemented
 10038	WARN	Content Security Policy Header Not Set — add CSP header
+10055	IGNORE	CSP unsafe-inline script-src and style-src — inline code in index.html requires unsafe-inline; refactoring out of scope
 
 # HTTPS — warn; app is HTTP-only in current deployment
 10035	WARN	Strict-Transport-Security Header Not Set
@@ -34,7 +35,7 @@
 10036	WARN	Server Leaks Version Information via Server HTTP Response Header
 
 # Google Fonts 
-90003	WARN	Sub Resource Integrity — Google Fonts CDN, impractical to fix
+90003	IGNORE	Sub Resource Integrity — Google Fonts CDN dynamic URL; SRI not feasible
 
 # Cross Origin Headers
 90004	WARN	Cross-Origin headers — add CORP/COEP/COOP
@@ -43,4 +44,4 @@
 10063	WARN	Permissions Policy Header Not Set — add header
 
 # Cache Control
-10049	WARN	Storable and Cacheable Content — add Cache-Control
+10049	IGNORE	Non-Storable Content — Cache-Control: no-store is intentional
