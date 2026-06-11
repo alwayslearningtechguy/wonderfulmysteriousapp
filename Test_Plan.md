@@ -164,7 +164,7 @@ axe-core scans via `axe-playwright-python`. Run against Chromium and Firefox.
 |---|---|
 | No critical/serious violations | axe-core all rules |
 | WCAG 2.1 AA compliance | wcag2a, wcag2aa, wcag21aa tags |
-| Colour contrast | WCAG AA 4.5:1 minimum |
+| Color contrast | WCAG AA 4.5:1 minimum |
 | Form labels | All inputs have programmatic labels |
 | Keyboard focus | No keyboard traps, no tabindex > 0 |
 
