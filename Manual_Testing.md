@@ -169,7 +169,7 @@ focus always visible; no traps.
 5. Repeat for "Achromatopsia".
 6. Enable "Force dark mode". Verify the page does not become unreadable.
 
-**Why manual:** Visual layout, responsive breakpoints, and colour blindness
+**Why manual:** Visual layout, responsive breakpoints, and color blindness
 rendering are not fully asserted in automated tests.
 
 ---
@@ -350,7 +350,7 @@ Python urllib healthcheck exits cleanly.
 | Cross-browser — Safari iOS | — | ✅ Section 2.3 |
 | Screen reader (NVDA, VoiceOver) | — | ✅ Section 3 |
 | Keyboard navigation | — | ✅ Section 4 |
-| Responsive layout / colour blindness | Partial (Playwright viewport) | ✅ Section 5 |
+| Responsive layout / color blindness | Partial (Playwright viewport) | ✅ Section 5 |
 | Rate limit window reset | — | ✅ Section 6 |
 | Error handling edge cases | Partial (security tests) | ✅ Section 7 |
 | OWASP ZAP full active scan | — | ✅ Section 8 |
